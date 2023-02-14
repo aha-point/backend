@@ -1,0 +1,27 @@
+type Query {
+    memberQuery: MemberQuery!
+}
+
+type MemberQuery {
+    # 아이디(전화번호) 중복체크
+    checkMemberIdDuplication(input: CheckMemberIdDuplicationInput!): Boolean!
+
+    # 전화번호로 유저정보 확인
+    getMemberByPhoneNumber(input: GetMemberByPhoneNumberInput!): [GetMemberByPhoneNumberResponse]
+}
+
+
+input CheckMemberIdDuplicationInput {
+    phoneNumber: String!
+}
+
+input GetMemberByPhoneNumberInput {
+    phoneNumber: String!
+}
+
+type GetMemberByPhoneNumberResponse {
+    userImage: String # user 프로필 사진
+    name: String! # 이름
+    phoneNumber: String! # 전화번호이자 아이디
+    id: Int! #user의 pk
+}

@@ -1,0 +1,63 @@
+#graphql:
+#  servlet:
+#    # Sets if GraphQL servlet should be created and exposed. If not specified defaults to "true".
+#    enabled: true
+#    # Sets the path where GraphQL servlet will be exposed. If not specified defaults to "/graphql"
+#    mapping: /graphql
+#    cors-enabled: true
+#    cors:
+#      allowed-origins: http://some.domain.com
+#      allowed-methods: GET, HEAD, POST
+#    # if you want to @ExceptionHandler annotation for custom GraphQLErrors
+#    exception-handlers-enabled: true
+#    context-setting: PER_REQUEST_WITH_INSTRUMENTATION
+#    # Sets if asynchronous operations are supported for GraphQL requests. If not specified defaults to true.
+#    async-mode-enabled: true
+spring:
+  application:
+    name: member
+
+# HTTP 2.0 ??
+server:
+  http2:
+    enabled: true
+
+
+graphql:
+  playground:
+    mapping: /playground
+    endpoint: /graphql
+    subscriptionEndpoint: /subscriptions
+    staticPath.base: my-playground-resources-folder
+    enabled: true
+    pageTitle: Playground
+    cdn:
+      enabled: false
+      version: latest
+    settings:
+      editor.cursorShape: line
+      editor.fontFamily: "'Source Code Pro', 'Consolas', 'Inconsolata', 'Droid Sans Mono', 'Monaco', monospace"
+      editor.fontSize: 14
+      editor.reuseHeaders: true
+      editor.theme: dark
+      general.betaUpdates: false
+      prettier.printWidth: 80
+      prettier.tabWidth: 2
+      prettier.useTabs: false
+      request.credentials: omit
+      schema.polling.enable: true
+      schema.polling.endpointFilter: "*localhost*"
+      schema.polling.interval: 2000
+      schema.disableComments: true
+      tracing.hideTracingResponse: true
+    headers:
+      headerFor: AllTabs
+    tabs:
+      - name: Example Tab
+        query: classpath:exampleQuery.graphql
+        headers:
+          SomeHeader: Some value
+        variables: classpath:variables.json
+        responses:
+          - classpath:exampleResponse1.json
+          - classpath:exampleResponse2.json
