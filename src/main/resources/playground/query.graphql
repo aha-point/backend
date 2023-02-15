@@ -1,0 +1,11 @@
+
+query MemberQuery {
+    memberQuery {
+        getMemberByPhoneNumber(input: "phoneNumber") {
+            id
+            userImage
+            name
+            phoneNumber
+        }
+    }
+}

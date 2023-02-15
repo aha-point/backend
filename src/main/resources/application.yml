@@ -21,9 +21,34 @@ spring:
 server:
   http2:
     enabled: true
+      # Enable or disable the introspection query. Disabling it puts your server in contravention of the GraphQL
+      # specification and expectations of most clients, so use this option with caution
 
-
+  #playGround
 graphql:
+  tools:
+    schema-location-pattern: "**/*.graphqls"
+    # Enable or disable the introspection query. Disabling it puts your server in contravention of the GraphQL
+    # specification and expectations of most clients, so use this option with caution
+    introspection-enabled: true
+  voyager:
+    enabled: true
+    basePath: /
+    mapping: /voyager
+    endpoint: /graphql
+    cdn:
+      enabled: false
+      version: latest
+    pageTitle: Voyager
+    displayOptions:
+      skipRelay: true
+      skipDeprecated: true
+      rootType: Query
+      sortByAlphabet: false
+      showLeafFields: true
+      hideRoot: false
+    hideDocs: false
+    hideSettings: false
   playground:
     mapping: /playground
     endpoint: /graphql
@@ -50,14 +75,14 @@ graphql:
       schema.polling.interval: 2000
       schema.disableComments: true
       tracing.hideTracingResponse: true
-    headers:
-      headerFor: AllTabs
     tabs:
-      - name: Example Tab
-        query: classpath:exampleQuery.graphql
+      - name: sample query
+        query: classpath:playground/query.graphql
+        variables: classpath:playground/request_variables.json
+
         headers:
           SomeHeader: Some value
-        variables: classpath:variables.json
+
         responses:
           - classpath:exampleResponse1.json
           - classpath:exampleResponse2.json

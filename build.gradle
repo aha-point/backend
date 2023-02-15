@@ -16,6 +16,7 @@ configurations {
 
 repositories {
 	mavenCentral()
+	google()
 }
 
 dependencies {
@@ -27,9 +28,15 @@ dependencies {
 	// GraphQL
 	implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
 	implementation 'com.graphql-java:graphql-java-tools:5.2.4'
-
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	// to embed Altair tool
+	runtimeOnly 'com.graphql-java-kickstart:altair-spring-boot-starter:11.0.0'
+	// to embed GraphiQL tool
+	runtimeOnly 'com.graphql-java-kickstart:graphiql-spring-boot-starter:11.0.0'
+	// to embed Voyager tool
+	runtimeOnly 'com.graphql-java-kickstart:voyager-spring-boot-starter:11.0.0'
+	// testing facilities
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework:spring-webflux'
