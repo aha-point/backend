@@ -1,11 +1,13 @@
 package com.member.interfaces.query;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class GetMemberByPhoneNumberResponse {
     private String userImage; // user 프로필 사진
     private String name; // 이름

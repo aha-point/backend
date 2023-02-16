@@ -1,11 +1,12 @@
-
 query MemberQuery {
     memberQuery {
-        getMemberByPhoneNumber(input: "phoneNumber") {
+        getMemberByPhoneNumber(input: {
+            phoneNumber: "212121212"
+        }) {
             id
-            userImage
-            name
             phoneNumber
+            name
+            userImage
         }
     }
 }
