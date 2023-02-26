@@ -1,5 +1,6 @@
 package com.member.interfaces.query;
 
+import common.util.SendMessageService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,14 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RestController
 @RequestMapping("/member")
 public class MemberQuery {
+
+    private final SendMessageService sendMessageService;
+
+    public CheckRandomCodeResponse checkRandomCode(CheckRandomCodeInput checkRandomCodeInput) {
+        sendMessageService.
+        return null;
+    }
+
 
     public Boolean checkMemberIdDuplication(CheckMemberIdDuplicationInput checkMemberIdDuplicationInput) {
         return true;

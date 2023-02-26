@@ -3,6 +3,9 @@ type Query {
 }
 
 type MemberQuery {
+    # 인증번호 일치여부 판단
+    checkRandomCode(input: CheckRandomCodeInput!): CheckRandomCodeResponse!
+
     # 아이디(전화번호) 중복체크
     checkMemberIdDuplication(input: CheckMemberIdDuplicationInput!): Boolean!
 
@@ -10,6 +13,13 @@ type MemberQuery {
     getMemberByPhoneNumber(input: GetMemberByPhoneNumberInput!): [GetMemberByPhoneNumberResponse]
 }
 
+input CheckRandomCodeInput {
+    phoneNumber: String!
+}
+
+type CheckRandomCodeResponse {
+    randomCode: String!
+}
 
 input CheckMemberIdDuplicationInput {
     phoneNumber: String!

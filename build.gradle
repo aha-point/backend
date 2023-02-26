@@ -30,6 +30,9 @@ dependencies {
 	implementation 'com.graphql-java:graphql-java-tools:5.2.4'
 	implementation 'com.graphql-java:graphql-java-spring-boot-starter-webmvc:2021-10-25T04-50-54-fbc162f'
 
+	// apache
+	implementation group: 'org.apache.commons', name: 'commons-lang3'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	// to embed Altair tool
