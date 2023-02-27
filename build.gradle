@@ -33,6 +33,11 @@ dependencies {
 	// apache
 	implementation group: 'org.apache.commons', name: 'commons-lang3'
 
+	// 문자서비스
+	implementation 'net.nurigo:sdk:4.2.7'
+	// thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	// to embed Altair tool

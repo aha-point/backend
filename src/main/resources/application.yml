@@ -13,6 +13,9 @@ spring:
 
 # HTTP 2.0 ??
 server:
+  error:
+    whitelabel:
+      enabled: false # ????? ??
   http2:
     enabled: true
       # Enable or disable the introspection query. Disabling it puts your server in contravention of the GraphQL
