@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"java"})
+@ComponentScan(basePackages = {"com.member.controller"})
 public class MemberApplication {
 
 	public static void main(String[] args) {
