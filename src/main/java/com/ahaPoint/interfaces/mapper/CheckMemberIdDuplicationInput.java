@@ -1,6 +1,5 @@
-package com.member.interfaces.mapper;
+package com.ahaPoint.interfaces.mapper;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -1,4 +1,4 @@
-package com.member.interfaces.controller;
+package com.ahaPoint.interfaces.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

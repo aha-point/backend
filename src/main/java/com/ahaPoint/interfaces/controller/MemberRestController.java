@@ -1,7 +1,7 @@
-package com.member.interfaces.controller;
+package com.ahaPoint.interfaces.controller;
 
-import com.member.interfaces.mapper.*;
-import com.member.common.util.SendMessageService;
+import com.ahaPoint.interfaces.mapper.*;
+import com.ahaPoint.common.util.SendMessageService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

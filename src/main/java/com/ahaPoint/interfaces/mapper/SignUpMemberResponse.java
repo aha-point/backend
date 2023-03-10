@@ -1,10 +1,8 @@
-package com.member.interfaces.mapper;
+package com.ahaPoint.interfaces.mapper;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
-
-import java.math.BigInteger;
 
 @Data
 @Getter

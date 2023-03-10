@@ -1,4 +1,4 @@
-package com.member.interfaces.mapper;
+package com.ahaPoint.interfaces.mapper;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

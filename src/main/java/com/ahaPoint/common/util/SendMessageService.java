@@ -1,7 +1,7 @@
-package com.member.common.util;
+package com.ahaPoint.common.util;
 
 
-import com.member.interfaces.mapper.CheckRandomCodeInput;
+import com.ahaPoint.interfaces.mapper.CheckRandomCodeInput;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.sdk.NurigoApp;
