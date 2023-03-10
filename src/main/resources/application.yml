@@ -3,6 +3,8 @@
 spring:
   application:
     name: member
+  thymeleaf:
+    enabled: true
   aop:
     auto:
   datasource:
@@ -21,79 +23,20 @@ server:
       # Enable or disable the introspection query. Disabling it puts your server in contravention of the GraphQL
       # specification and expectations of most clients, so use this option with caution
 
-  #playGround
-graphql:
-  servlet:
+# http://localhost:8080/swagger-ui/index.html
+springdoc:
+  swagger-ui:
     enabled: true
-  # Sets if GraphQL servlet should be created and exposed. If not specified defaults to "true".
+    path: "swagger.html"
+    tags-sorter: "alpha"
+    operations-sorter: "alpha"
+  packages-to-scan: "com.member"
+  default-consumes-media-type: "application/json;charset=UTF-8"
+  default-produces-media-type: "application/json;charset=UTF-8"
+  api-docs:
+    path: "/api/member/*"
+    groups:
+      enabled: true
+  cache:
+    disabled: true
 
-  # Sets the path where GraphQL servlet will be exposed. If not specified defaults to "/graphql"
-  mapping: /graphql
-  cors-enabled: true
-  cors:
-    allowed-methods: GET, HEAD, POST
-  # if you want to @ExceptionHandler annotation for custom GraphQLErrors
-  exception-handlers-enabled: true
-  #context-setting: PER_REQUEST_WITH_INSTRUMENTATION
-  # Sets if asynchronous operations are supported for GraphQL requests. If not specified defaults to true.
-  async-mode-enabled: true
-  tools:
-    schema-location-pattern: "**/*.graphqls"
-    # Enable or disable the introspection query. Disabling it puts your server in contravention of the GraphQL
-    # specification and expectations of most clients, so use this option with caution
-    introspection-enabled: true
-  voyager:
-    enabled: true
-    basePath: /
-    mapping: /voyager
-    endpoint: /graphql
-    cdn:
-      enabled: false
-      version: latest
-    pageTitle: Voyager
-    displayOptions:
-      skipRelay: true
-      skipDeprecated: true
-      rootType: Query
-      sortByAlphabet: false
-      showLeafFields: true
-      hideRoot: false
-    hideDocs: false
-    hideSettings: false
-  playground:
-    mapping: /playground
-    endpoint: /graphql
-    subscriptionEndpoint: /subscriptions
-    staticPath.base: my-playground-resources-folder
-    enabled: true
-    pageTitle: Playground
-    cdn:
-      enabled: false
-      version: latest
-    settings:
-      editor.cursorShape: line
-      editor.fontFamily: "'Source Code Pro', 'Consolas', 'Inconsolata', 'Droid Sans Mono', 'Monaco', monospace"
-      editor.fontSize: 14
-      editor.reuseHeaders: true
-      editor.theme: dark
-      general.betaUpdates: false
-      prettier.printWidth: 80
-      prettier.tabWidth: 2
-      prettier.useTabs: false
-      request.credentials: omit
-      schema.polling.enable: true
-      schema.polling.endpointFilter: "*localhost*"
-      schema.polling.interval: 2000
-      schema.disableComments: true
-      tracing.hideTracingResponse: true
-    tabs:
-      - name: sample query
-        query: classpath:playground/query.graphql
-        variables: classpath:playground/request_variables.json
-
-        headers:
-          SomeHeader: Some value
-
-        responses:
-          - classpath:exampleResponse1.json
-          - classpath:exampleResponse2.json

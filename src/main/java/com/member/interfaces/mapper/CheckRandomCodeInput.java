@@ -1,4 +1,4 @@
-package com.member.interfaces.query;
+package com.member.interfaces.mapper;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

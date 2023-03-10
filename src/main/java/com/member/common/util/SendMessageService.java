@@ -1,7 +1,7 @@
-package common.util;
+package com.member.common.util;
 
 
-import com.member.interfaces.query.CheckRandomCodeInput;
+import com.member.interfaces.mapper.CheckRandomCodeInput;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.sdk.NurigoApp;
@@ -11,7 +11,6 @@ import net.nurigo.sdk.message.exception.NurigoUnknownException;
 import net.nurigo.sdk.message.model.Message;
 import net.nurigo.sdk.message.model.MessageType;
 import net.nurigo.sdk.message.service.DefaultMessageService;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
