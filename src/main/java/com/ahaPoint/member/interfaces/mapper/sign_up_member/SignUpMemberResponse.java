@@ -1,4 +1,4 @@
-package com.ahaPoint.interfaces.mapper;
+package com.ahaPoint.member.interfaces.mapper.sign_up_member;
 
 import lombok.Builder;
 import lombok.Data;

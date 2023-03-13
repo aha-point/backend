@@ -1,4 +1,4 @@
-package com.ahaPoint.interfaces.mapper;
+package com.ahaPoint.member.interfaces.mapper.check_member_id_duplication;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

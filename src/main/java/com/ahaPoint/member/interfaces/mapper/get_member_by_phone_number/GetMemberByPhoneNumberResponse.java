@@ -1,4 +1,4 @@
-package com.ahaPoint.interfaces.mapper;
+package com.ahaPoint.member.interfaces.mapper.get_member_by_phone_number;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
