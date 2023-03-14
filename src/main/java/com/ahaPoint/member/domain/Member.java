@@ -22,12 +22,6 @@ public class Member {
     @Id @Column(name = "sys_id")
     private Long id; // sysUser Id (pk)
 
-    @Max(value = 11)
-    private String phoneNumber;
-
-    @NotBlank
-    private String password;
-
     @NotBlank
     private String name;
 
