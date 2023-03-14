@@ -1,9 +1,7 @@
 package com.ahaPoint.member.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.ahaPoint.sysUser.domain.SysUser;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
@@ -45,5 +43,12 @@ public class Member {
 
     private LocalDateTime updatedAt;
 
+    /* ============ <연관관계> ============ */
+    @OneToOne(fetch = FetchType.LAZY, optional = false, mappedBy = "member")
+    @JoinColumn(name = "sysId", insertable = false, updatable = false)
+    private SysUser sysUser;
 
+    public void setId(Long id) { // sysUser의 Id 값을 넣어서 save한다.
+        this.id = id;
+    }
 }
