@@ -2,6 +2,7 @@ package com.ahaPoint.member.interfaces.controller;
 
 import com.ahaPoint.common.util.SendMessageService;
 import com.ahaPoint.member.application.MemberFacade;
+import com.ahaPoint.member.domain.MemberCommand;
 import com.ahaPoint.member.domain.MemberCriteria;
 import com.ahaPoint.member.interfaces.mapper.check_member_id_duplication.CheckMemberIdDuplicationInput;
 import com.ahaPoint.member.interfaces.mapper.check_random_code.CheckRandomCodeInput;
@@ -27,9 +28,9 @@ public class MemberRestController {
     @PostMapping(":signUpMember")
     @Operation(summary = "회원가입", description = "일반유저가 회원가입하는 메소드입니다.")
     public SignUpMemberResponse signUpMember(SignUpMemberInput input) {
-        MemberCriteria.MemberInfo memberInfo = input.toCriteria();
-        memberFacade.signUpMember(memberInfo);
-        // input -> Criteria
+        MemberCommand.Save save = input.toCommand();
+        memberFacade.signUpMember(save);
+
         return null;
     }
 

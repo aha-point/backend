@@ -4,4 +4,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface MemberService {
 
+    Boolean signUpMember(MemberCommand.Save save);
 }
