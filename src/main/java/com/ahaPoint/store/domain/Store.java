@@ -1,9 +1,7 @@
-package com.ahaPoint.member.domain;
+package com.ahaPoint.store.domain;
 
 import com.ahaPoint.sysUser.domain.SysUser;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
@@ -11,31 +9,30 @@ import org.hibernate.annotations.DynamicUpdate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "member", catalog = "aha_point")
+@Table(name = "store", catalog = "aha_point")
 @Getter
 @DynamicUpdate
-@NoArgsConstructor @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(builderMethodName = "entityBuilder", toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class Member {
+public class Store {
 
     @Id @Column(name = "sys_id")
-    private Long id; // sysUser Id (pk)
-
+    private Long id; // sysUser의 pk
     @NotBlank
-    private String name;
+    private String storeName; // 상호명
+    @NotBlank
+    private String storePhoneNumber; // 가게번호
+    @NotBlank
+    private String storeAddress; // 가게 주소
+    private String storeZipCode; // 가게 우편번호
+    private Long storeImageId; // 가게 이미지
 
-    @Email
-    private String email;
-
-    @Max(value = 5)
-    private String zipCode;
-
-    private String address;
-
+    private Integer pointPercentage; // 포인트 퍼센트
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
+
 
     /* ============ <연관관계> ============ */
     @OneToOne(fetch = FetchType.LAZY, optional = false)

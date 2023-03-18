@@ -1,6 +1,7 @@
 package com.ahaPoint.sysUser.domain;
 
 import com.ahaPoint.member.domain.Member;
+import com.ahaPoint.store.domain.Store;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
@@ -38,8 +39,9 @@ public class SysUser {
 
 
     /* ============ <연관관계> ============ */
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "sysId", insertable = false, updatable = false)
-    private Member member;
+    @OneToOne(fetch = FetchType.LAZY, optional = false, mappedBy = "sysUser")
+    private Store store;
 
+    @OneToOne(fetch = FetchType.LAZY, optional = false, mappedBy = "sysUser")
+    private Member member;
 }
