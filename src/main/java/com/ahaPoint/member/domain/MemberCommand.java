@@ -14,8 +14,10 @@ public class MemberCommand {
     @ToString
     @Builder(toBuilder = true)
     public static class Save {
-        private String phoneNumber; // 아이디 겸 핸드폰번호
+
+        private String phoneNumber; // 전화번호 + 아이디
         private String password; // 비밀번호
+
         private String name; // 이름
         private String zipCode; // 우편번호
         private String address; // 주소
