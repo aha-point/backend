@@ -49,6 +49,9 @@ public class Store {
     @OneToMany(mappedBy = "store")
     private List<StoreDtlMenu> storeDtlMenuList;
 
+    @OneToMany(mappedBy = "store")
+    private List<StoreCategory> storeCategoryList;
+
     public void setId(Long id) { // sysUser의 Id 값을 넣어서 save한다.
         this.id = id;
     }
