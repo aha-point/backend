@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "store", catalog = "aha_point")
@@ -38,6 +39,15 @@ public class Store {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "sysId", insertable = false, updatable = false)
     private SysUser sysUser;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false, mappedBy = "store")
+    private StoreDtlInfo storeDtlInfo;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false, mappedBy = "store")
+    private StoreDtlInfo storeDtlInfra;
+
+    @OneToMany(mappedBy = "store")
+    private List<StoreDtlMenu> storeDtlMenuList;
 
     public void setId(Long id) { // sysUser의 Id 값을 넣어서 save한다.
         this.id = id;
