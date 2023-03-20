@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/api")
 public class MemberController {
 
-    @GetMapping("/member")
+    //@GetMapping("/member")
     @ResponseBody
     public String testGet() {
         return "jiaTest";

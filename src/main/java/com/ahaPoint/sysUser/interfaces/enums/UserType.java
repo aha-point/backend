@@ -1,4 +1,4 @@
-package com.ahaPoint.sysUser.domain;
+package com.ahaPoint.sysUser.interfaces.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

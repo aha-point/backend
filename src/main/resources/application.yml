@@ -30,11 +30,11 @@ springdoc:
     path: "swagger.html"
     tags-sorter: "alpha"
     operations-sorter: "alpha"
-  packages-to-scan: "com.member"
+  packages-to-scan: "com.ahaPoint"
   default-consumes-media-type: "application/json;charset=UTF-8"
   default-produces-media-type: "application/json;charset=UTF-8"
   api-docs:
-    path: "/api/member/*"
+    path: "/api/*"
     groups:
       enabled: true
   cache:

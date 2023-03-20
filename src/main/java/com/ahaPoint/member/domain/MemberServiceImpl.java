@@ -4,7 +4,7 @@ import com.ahaPoint.member.infrastructure.MemberRepository;
 import com.ahaPoint.sysUser.domain.SysUser;
 import com.ahaPoint.sysUser.domain.SysUserCommand;
 import com.ahaPoint.sysUser.domain.SysUserDelegator;
-import com.ahaPoint.sysUser.domain.UserType;
+import com.ahaPoint.sysUser.interfaces.enums.UserType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

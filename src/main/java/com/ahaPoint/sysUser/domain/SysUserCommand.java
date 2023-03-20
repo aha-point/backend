@@ -1,6 +1,7 @@
 package com.ahaPoint.sysUser.domain;
 
 import com.ahaPoint.member.domain.MemberCommand;
+import com.ahaPoint.sysUser.interfaces.enums.UserType;
 import lombok.*;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
