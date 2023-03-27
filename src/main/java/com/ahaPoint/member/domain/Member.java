@@ -33,6 +33,8 @@ public class Member {
 
     private String address;
 
+    private String agreeMarketing; // 이메일 수신 동의
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;

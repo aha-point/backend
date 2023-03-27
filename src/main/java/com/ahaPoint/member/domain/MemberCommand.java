@@ -19,6 +19,10 @@ public class MemberCommand {
         private String password; // 비밀번호
 
         private String name; // 이름
+
+        private String email; // 이메일
+
+        private String agreeMarketing;
         private String zipCode; // 우편번호
         private String address; // 주소
     }

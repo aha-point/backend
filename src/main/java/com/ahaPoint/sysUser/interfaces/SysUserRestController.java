@@ -1,12 +1,16 @@
 package com.ahaPoint.sysUser.interfaces;
 
+import com.ahaPoint.member.application.MemberFacade;
+import com.ahaPoint.member.domain.MemberCommand;
 import com.ahaPoint.member.interfaces.mapper.check_member_id_duplication.CheckMemberIdDuplicationInput;
+import com.ahaPoint.member.interfaces.mapper.sign_up_member.SignUserInput;
 import com.ahaPoint.sysUser.domain.CheckNumber;
 import com.ahaPoint.member.interfaces.mapper.check_random_code.CheckRandomCodeInput;
 import com.ahaPoint.member.interfaces.mapper.check_random_code.CheckRandomCodeResponse;
 import com.ahaPoint.sysUser.application.SysUserFacade;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +21,37 @@ import org.springframework.web.bind.annotation.RestController;
 public class SysUserRestController {
 
     private final SysUserFacade sysUserFacade;
+
+    private final MemberFacade memberFacade;
+
+    /**
+     * 회원가입
+     */
+    @PostMapping("/sysUser:signUp")
+    @Operation(summary = "회원가입", description = "회원가입하는 API입니다.")
+    public void signUpMember(SignUserInput input) {
+
+        // 사진 먼저 저장
+
+
+        // store 하고 저장
+
+        // memberDFacade 저장
+
+        // sysUser 저장
+
+
+        if (StringUtils.hasText(input.getStoreName())) { // store
+
+        }
+
+
+        // member
+//        MemberCommand.Save save = input.toSysUserCommand(input);
+//        memberFacade.signUpMember(save);
+
+
+    }
 
     /**
      * 회원가입시, 전화번호 확인용 문자발송

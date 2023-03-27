@@ -2,6 +2,7 @@ package com.ahaPoint.store.domain;
 
 import com.ahaPoint.sysUser.domain.SysUser;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
@@ -23,6 +24,8 @@ public class Store {
     private Long id; // sysUser의 pk
     @NotBlank
     private String storeName; // 상호명
+    @Email
+    private String email; // 이메일
     @NotBlank
     private String storePhoneNumber; // 가게번호
     @NotBlank

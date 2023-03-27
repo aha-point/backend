@@ -1,11 +1,15 @@
-package com.ahaPoint.sysUser.domain;
+package com.ahaPoint.common.domain;
 
 import com.ahaPoint.member.domain.MemberCommand;
+import com.ahaPoint.member.interfaces.mapper.sign_up_member.SignUserInput;
+import com.ahaPoint.sysUser.domain.SysUser;
+import com.ahaPoint.sysUser.domain.SysUserCommand;
 import com.ahaPoint.sysUser.interfaces.enums.UserType;
 import lombok.*;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class SysUserCommand {
+public class ImageCommand {
+
 
     /**
      * save 할때 dto
@@ -16,9 +20,8 @@ public class SysUserCommand {
     @AllArgsConstructor
     public static class Save {
 
-        private String phoneNumber; // 아이디 겸 핸드폰번호
-        private String password; // 비밀번호
-        private UserType type; // member or store
+        private String url; // 사진 url
+        private String represent; // 대표사진 유무
 
         public static SysUser toEntity(MemberCommand.Save save, UserType type) {
             return SysUser.entityBuilder()
