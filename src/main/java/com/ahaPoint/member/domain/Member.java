@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Member {
 
-    @Id @Column(name = "sys_id")
+    @Column(name = "sys_id")
     private Long id; // sysUser Id (pk)
 
     @NotBlank

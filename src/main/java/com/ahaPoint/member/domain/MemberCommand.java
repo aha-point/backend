@@ -25,8 +25,6 @@ public class MemberCommand {
         private String agreeMarketing;
         private String zipCode; // 우편번호
         private String address; // 주소
-    }
-
     public static Member toEntity(Save save) {
         return Member.entityBuilder()
                 .name(save.name)
@@ -35,5 +33,8 @@ public class MemberCommand {
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();
+        }
+
     }
+
 }

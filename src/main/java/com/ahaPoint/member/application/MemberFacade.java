@@ -1,7 +1,6 @@
 package com.ahaPoint.member.application;
 
 import com.ahaPoint.member.domain.MemberCommand;
-import com.ahaPoint.member.domain.MemberCriteria;
 
 import com.ahaPoint.member.domain.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +13,8 @@ import org.springframework.stereotype.Component;
 public class MemberFacade {
     private final MemberService memberService;
 
-    public Boolean signUpMember(MemberCommand.Save save) {
-        return memberService.signUpMember(save);
+    public void saveMember(MemberCommand.Save save) {
+        memberService.saveMember(save);
     }
 
 }

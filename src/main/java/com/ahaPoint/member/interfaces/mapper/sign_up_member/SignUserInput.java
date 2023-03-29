@@ -5,11 +5,9 @@ import com.ahaPoint.member.domain.MemberCommand;
 import com.ahaPoint.store.domain.StoreCommand;
 import com.ahaPoint.sysUser.domain.SysUserCommand;
 import com.ahaPoint.sysUser.interfaces.enums.UserType;
+import io.micrometer.common.util.StringUtils;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
@@ -21,9 +19,12 @@ public class SignUserInput {
     private String phoneNumber; // 아이디 겸 전화번호
     @NotBlank
     private String password; // 비밀번호
+    @Setter
+    private Long SysUserId; // sysUser의 pk
     /**
      * member 정보
      */
+
     private String name; // 이름
 
     private String email; // 이메일
@@ -40,12 +41,14 @@ public class SignUserInput {
     private String storePhoneNumber; // 가게번호
     private String storeAddress; // 가게 주소
     private String storeZipCode; // 가게 우편번호
+    private Integer pointPercentage; // 포인트 퍼센트
+    @Setter
+    private Long imageId; // 가게대표사진
+
     private String url; // 사진 url
     private String represent; // 대표사진
-    private Integer pointPercentage; // 포인트 퍼센트
 
-
-    public MemberCommand.Save toMemberCommand(SignUserInput input) { // member command
+    public static MemberCommand.Save toMemberCommand(SignUserInput input) { // member command
         return MemberCommand.Save.builder()
                 .name(input.getName())
                 .email(input.getEmail())
@@ -54,15 +57,15 @@ public class SignUserInput {
                 .build();
     }
 
-    public SysUserCommand.Save toSysUserCommand(SignUserInput input, UserType type) {
+    public static SysUserCommand.Save toSysUserCommand(SignUserInput input) {
         return SysUserCommand.Save.builder()
                 .phoneNumber(input.getPhoneNumber())
                 .password(input.getPassword())
-                .type(type)
+                .type(setUserType(input))
                 .build();
     }
 
-    public StoreCommand.Save toStoreCommand(SignUserInput input) {
+    public static StoreCommand.Save toStoreCommand(SignUserInput input) {
         return StoreCommand.Save.builder()
                 .storeName(input.getStoreName())
                 .storePhoneNumber(input.getStorePhoneNumber())
@@ -73,11 +76,18 @@ public class SignUserInput {
                 .build();
     }
 
-    public ImageCommand.Save toImageCommand(SignUserInput input) {
+    public static ImageCommand.Save toImageCommand(SignUserInput input) {
         return ImageCommand.Save.builder()
                 .url(input.getUrl())
                 .represent(input.getRepresent())
                 .build();
+    }
+
+    private static UserType setUserType(SignUserInput input) {
+        if (StringUtils.isNotBlank(input.getStoreName())) {
+            return UserType.STORE;
+        }
+        return UserType.MEMBER;
     }
 
 }

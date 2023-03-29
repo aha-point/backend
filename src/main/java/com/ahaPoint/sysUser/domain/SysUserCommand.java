@@ -20,11 +20,11 @@ public class SysUserCommand {
         private String password; // 비밀번호
         private UserType type; // member or store
 
-        public static SysUser toEntity(MemberCommand.Save save, UserType type) {
+        public static SysUser toEntity(SysUserCommand.Save save) {
             return SysUser.entityBuilder()
                     .phoneNumber(save.getPhoneNumber())
                     .password(save.getPassword())
-                    .type(type.name())
+                    .type(save.getType().name())
                     .build();
         }
 

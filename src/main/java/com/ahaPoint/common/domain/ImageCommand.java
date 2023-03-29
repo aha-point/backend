@@ -23,11 +23,10 @@ public class ImageCommand {
         private String url; // 사진 url
         private String represent; // 대표사진 유무
 
-        public static SysUser toEntity(MemberCommand.Save save, UserType type) {
-            return SysUser.entityBuilder()
-                    .phoneNumber(save.getPhoneNumber())
-                    .password(save.getPassword())
-                    .type(type.name())
+        public static Image toEntity(ImageCommand.Save save) {
+            return Image.entityBuilder()
+                    .url(save.getUrl())
+                    .represent(save.getRepresent())
                     .build();
         }
 

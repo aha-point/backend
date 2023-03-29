@@ -16,20 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
 
-    private MemberStore memberStore;
-    private MemberRepository memberRepository;
-    private SysUserDelegator sysUserDelegator;
+
+    private final MemberRepository memberRepository;
 
     @Override
-    public Boolean signUpMember(MemberCommand.Save save) {
-
-        SysUser toSaveSysUser = SysUserCommand.Save.toEntity(save, UserType.MEMBER);
-        SysUser saved = sysUserDelegator.saveSysUser(toSaveSysUser);
-
-        // 저장된 sysUser의 id를 member id 로 set한다.
-        Member member = MemberCommand.toEntity(save);
-        member.setId(saved.getId());
-
-        return memberStore.SignUpMember(member);
+    public void saveMember(MemberCommand.Save save) {
+        Member member = MemberCommand.Save.toEntity(save);
+        memberRepository.save(member);
     }
 }

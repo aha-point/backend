@@ -1,6 +1,10 @@
 package com.ahaPoint.store.domain;
 
+import com.ahaPoint.member.domain.Member;
+import com.ahaPoint.member.domain.MemberCommand;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class StoreCommand {
@@ -20,5 +24,17 @@ public class StoreCommand {
         private Long storeImageId; // 가게 이미지
         private Integer pointPercentage; // 포인트 퍼센트
         private String email; // 이메일
+    public static Store toEntity(StoreCommand.Save save) {
+        return Store.entityBuilder()
+                .storeName(save.getStoreName())
+                .storePhoneNumber(save.getStorePhoneNumber())
+                .storeAddress(save.getStoreAddress())
+                .storeZipCode(save.getStoreZipCode())
+                .storeImageId(save.getStoreImageId())
+                .email(save.getEmail())
+                .build();
+        }
+
     }
+
 }
