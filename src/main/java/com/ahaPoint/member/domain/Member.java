@@ -19,6 +19,11 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Member {
 
+    @Id
+    @Column(name = "member_id")
+    @GeneratedValue
+    private Long memberId; // member pk
+
     @Column(name = "sys_id")
     private Long id; // sysUser Id (pk)
 
@@ -41,7 +46,7 @@ public class Member {
 
     /* ============ <연관관계> ============ */
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "sysId", insertable = false, updatable = false)
+    @JoinColumn(name = "sys_id", insertable = false, updatable = false)
     private SysUser sysUser;
 
     public void setId(Long id) { // sysUser의 Id 값을 넣어서 save한다.

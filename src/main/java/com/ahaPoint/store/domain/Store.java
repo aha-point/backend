@@ -20,7 +20,12 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Store {
 
-    @Id @Column(name = "sys_id")
+
+    @Id
+    @Column(name = "store_id")
+    @GeneratedValue
+    private Long storeId; // store pk
+    @Column(name = "sys_id")
     private Long id; // sysUser의 pk
     @NotBlank
     private String storeName; // 상호명
@@ -40,7 +45,7 @@ public class Store {
 
     /* ============ <연관관계> ============ */
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "sysId", insertable = false, updatable = false)
+    @JoinColumn(name = "sys_id", insertable = false, updatable = false)
     private SysUser sysUser;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false, mappedBy = "store")
