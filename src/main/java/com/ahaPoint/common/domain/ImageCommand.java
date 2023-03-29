@@ -7,6 +7,9 @@ import com.ahaPoint.sysUser.domain.SysUserCommand;
 import com.ahaPoint.sysUser.interfaces.enums.UserType;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ImageCommand {
 
@@ -27,6 +30,8 @@ public class ImageCommand {
             return Image.entityBuilder()
                     .url(save.getUrl())
                     .represent(save.getRepresent())
+                    .createdAt(LocalDateTime.now())
+                    .updatedAt(LocalDateTime.now())
                     .build();
         }
 

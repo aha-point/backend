@@ -4,6 +4,8 @@ import com.ahaPoint.member.domain.MemberCommand;
 import com.ahaPoint.sysUser.interfaces.enums.UserType;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SysUserCommand {
 
@@ -25,6 +27,8 @@ public class SysUserCommand {
                     .phoneNumber(save.getPhoneNumber())
                     .password(save.getPassword())
                     .type(save.getType().name())
+                    .createdAt(LocalDateTime.now())
+                    .updatedAt(LocalDateTime.now())
                     .build();
         }
 

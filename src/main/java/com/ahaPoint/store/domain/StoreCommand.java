@@ -32,6 +32,8 @@ public class StoreCommand {
                 .storeZipCode(save.getStoreZipCode())
                 .storeImageId(save.getStoreImageId())
                 .email(save.getEmail())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
         }
 
