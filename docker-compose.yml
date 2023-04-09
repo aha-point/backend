@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db_mysql:
+    # MacOS m1칩 사용자는 아래 (platform: linux/x86_64) 주석을 풀고 실행해주세요 / 다른 분은 주석으로 해주시고 실행해주세요
+    # db_mysql system prune --volumes : memory 오류가 날 경우 실행
+    platform: linux/x86_64
+    volumes:
+      - ./db_mysql/data:/var/lib/mysql
+    user: "1000:1000"
+    build:
+      context: ./db_mysql
+      dockerfile: ./mysql.Dockerfile
+    environment:
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=uiop9900
+      - MYSQL_DATABASE=aha_point
+    command:
+      - --character-set-server=utf8
+      - --collation-server=utf8_unicode_ci
+      - --innodb-flush-method=O_DIRECT
+    restart: always
+
+  my_app:
+    depends_on:
+      - db_mysql
+    image: jia/ahapoint:0.0.3
+    environment:
+      - javax.persistence.jdbc.url=jdbc:mysql://db_mysql:3306/aha_point?serverTimezone=Asia/Seoul

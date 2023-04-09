@@ -62,4 +62,14 @@ public class SysUserRestController {
         memberFacade.saveMember(memberSave);
     }
 
+
+    /**
+     * 로그인
+     */
+    @PostMapping("/sysUser:logIn")
+    @Operation(summary = "로그인", description = "로그인하는 API입니다.")
+    public LogInResponse logInSysUser(LogInInput input) {
+        return null;
+    }
+
 }

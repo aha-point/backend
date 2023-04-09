@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.0.2'
+	id 'org.springframework.boot' version '2.5.5'
 	id 'io.spring.dependency-management' version '1.1.0'
 }
 
@@ -24,38 +24,35 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-graphql'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
 
-	// 1. GraphQL
-	implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
-	implementation 'com.graphql-java:graphql-java-tools:5.2.4'
-	implementation 'com.graphql-java:graphql-java-spring-boot-starter-webmvc:2021-10-25T04-50-54-fbc162f'
-
-	// 2. apache
+	// apache
 	implementation group: 'org.apache.commons', name: 'commons-lang3'
 
 	// 문자서비스
 	implementation 'net.nurigo:sdk:4.2.7'
+
 	// thymeleaf
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-	compileOnly 'org.projectlombok:lombok'
+	// mysql
 	runtimeOnly 'com.mysql:mysql-connector-j'
-	// to embed Altair tool
-	runtimeOnly 'com.graphql-java-kickstart:altair-spring-boot-starter:11.0.0'
-	// to embed GraphiQL tool
-	runtimeOnly 'com.graphql-java-kickstart:graphiql-spring-boot-starter:11.0.0'
-	// to embed Voyager tool
-	runtimeOnly 'com.graphql-java-kickstart:voyager-spring-boot-starter:11.0.0'
+	implementation 'mysql:mysql-connector-java:8.0.27'
+	//implementation 'mysql:mysql-connector-java:8.0.26'
+
 	// testing facilities
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework:spring-webflux'
 	testImplementation 'org.springframework.graphql:spring-graphql-test'
 
+	// jwt
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'com.auth0:java-jwt:3.19.2'
+
 	// swagger
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.0.0'
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
-
 
 }
 

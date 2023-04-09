@@ -1,8 +1,6 @@
 ## 베이스 이미지 명시 - 이미지 생성시 기반이 되는 이미지 레이어
-## 기존에 존재하는
 #FROM bkielczewski/java17
-#FROM mysql:latest
-#
+
 ## 추가적으로 필요한 파일들을 다운로드 받는다.
 #COPY build/libs/*.jar ahaproject.jar
 #COPY ./my.cnf /etc/mysql/my.cnf
@@ -12,11 +10,10 @@
 ## 컨테이너 시작시 실행될 명령어를 명시해준다.
 #ENTRYPOINT ["java","-jar","app.jar"]
 
-FROM docker.io/library/mysql:latest
-FROM ubuntu:latest
+FROM openjdk:17
 
 # Install OpenJDK 17
-RUN apt-get update && apt-get install -y openjdk-17-jdk
+#RUN apt-get update && apt-get install -y openjdk-17-jdk
 
 # Set the working directory
 WORKDIR /app
@@ -25,7 +22,7 @@ WORKDIR /app
 COPY build/libs/*.jar app.jar
 
 # Copy the MySQL configuration file
-COPY ./my.cnf /etc/mysql/my.cnf
+COPY db_mysql/my.cnf /etc/mysql/my.cnf
 
 # Expose port 8080 for the application
 EXPOSE 8080

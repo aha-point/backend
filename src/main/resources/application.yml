@@ -1,49 +1,14 @@
-
-
 spring:
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true  # SQL pretty print
-  application:
-    name: member
-  thymeleaf:
-    enabled: true
-  aop:
-    auto:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/aha_point?serverTimezone=Asia/Seoul
-    username: root
+    url: jdbc:mysql://localhost:3306/aha-point_name?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: user
     password: uiop9900
 
-# HTTP 2.0 ??
-server:
-  error:
-    whitelabel:
-      enabled: false # ????? ??
-  http2:
-    enabled: true
-      # Enable or disable the introspection query. Disabling it puts your server in contravention of the GraphQL
-      # specification and expectations of most clients, so use this option with caution
-
-# http://localhost:8080/swagger-ui/index.html
-springdoc:
-  swagger-ui:
-    enabled: true
-    path: "swagger.html"
-    tags-sorter: "alpha"
-    operations-sorter: "alpha"
-  packages-to-scan: "com.ahaPoint"
-  default-consumes-media-type: "application/json;charset=UTF-8"
-  default-produces-media-type: "application/json;charset=UTF-8"
-  api-docs:
-    path: "/api/*"
-    groups:
-      enabled: true
-  cache:
-    disabled: true
-
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
