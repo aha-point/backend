@@ -1,14 +1,14 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/aha-point_name?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-    username: user
+    url: jdbc:mysql://localhost:3306/aha_point?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
     password: uiop9900
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
