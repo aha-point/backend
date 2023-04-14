@@ -22,7 +22,7 @@ WORKDIR /app
 COPY build/libs/*.jar app.jar
 
 # Copy the MySQL configuration file
-COPY db_mysql/my.cnf /etc/mysql/my.cnf
+#COPY db_mysql/my.cnf /etc/mysql/my.cnf
 
 # Expose port 8080 for the application
 EXPOSE 8080

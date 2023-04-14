@@ -21,4 +21,8 @@ public class SysUserFacade {
     public SysUser saveSysUser(SysUserCommand.Save save) {
         return sysUserService.saveSysUser(save);
     }
+
+    public Boolean isDuplicated(String phoneNumber) {
+        return sysUserService.isDuplicated(phoneNumber);
+    }
 }

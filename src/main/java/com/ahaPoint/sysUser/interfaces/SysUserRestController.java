@@ -4,13 +4,9 @@ import com.ahaPoint.common.application.CommonFacade;
 import com.ahaPoint.common.domain.Image;
 import com.ahaPoint.member.application.MemberFacade;
 import com.ahaPoint.member.domain.MemberCommand;
-import com.ahaPoint.member.interfaces.mapper.check_member_id_duplication.CheckMemberIdDuplicationInput;
 import com.ahaPoint.member.interfaces.mapper.sign_up_member.SignUserInput;
 import com.ahaPoint.store.application.StoreFacade;
 import com.ahaPoint.store.domain.StoreCommand;
-import com.ahaPoint.sysUser.domain.CheckNumber;
-import com.ahaPoint.member.interfaces.mapper.check_random_code.CheckRandomCodeInput;
-import com.ahaPoint.member.interfaces.mapper.check_random_code.CheckRandomCodeResponse;
 import com.ahaPoint.sysUser.application.SysUserFacade;
 import com.ahaPoint.sysUser.domain.SysUser;
 import com.ahaPoint.sysUser.domain.SysUserCommand;
@@ -72,4 +68,13 @@ public class SysUserRestController {
         return null;
     }
 
+    /**
+     * 중복 체크(전화번호)
+     */
+    @PostMapping("/sysUser:checkDuplicated")
+    @Operation(summary = "아이디 중복체크", description = "아이디(전화번호) 중복을 체크하는 API입니다.")
+    public CheckPhoneNumber isDuplicated(String phoneNumber) {
+        Boolean result = sysUserFacade.isDuplicated(phoneNumber);
+        return CheckPhoneNumber.getIsDuplicated(result);
+    }
 }

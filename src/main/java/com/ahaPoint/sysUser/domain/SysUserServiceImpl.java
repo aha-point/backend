@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 @Slf4j
 @Service
@@ -26,5 +27,15 @@ public class SysUserServiceImpl implements SysUserService{
     public SysUser saveSysUser(SysUserCommand.Save save) {
         SysUser saveSysUser = SysUserCommand.Save.toEntity(save);
         return sysUserRepository.save(saveSysUser);
+    }
+
+    @Override
+    public Boolean isDuplicated(String phoneNumber) {
+        SysUser byPhoneNumber = sysUserRepository.findByPhoneNumber(phoneNumber);
+
+        if (ObjectUtils.isEmpty(byPhoneNumber)) { // 중복아님
+            return false;
+        }
+        return true; // 중복
     }
 }
