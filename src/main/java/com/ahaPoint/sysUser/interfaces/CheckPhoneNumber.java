@@ -12,8 +12,4 @@ import lombok.NoArgsConstructor;
 public class CheckPhoneNumber {
     private IsDuplicated isDuplicated;
 
-    public static CheckPhoneNumber getIsDuplicated (Boolean value) {
-        IsDuplicated result = IsDuplicated.getIsDuplicated(value);
-        return CheckPhoneNumber.of(result);
-    }
 }

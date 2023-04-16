@@ -75,6 +75,6 @@ public class SysUserRestController {
     @Operation(summary = "아이디 중복체크", description = "아이디(전화번호) 중복을 체크하는 API입니다.")
     public CheckPhoneNumber isDuplicated(String phoneNumber) {
         Boolean result = sysUserFacade.isDuplicated(phoneNumber);
-        return CheckPhoneNumber.getIsDuplicated(result);
+        return CheckPhoneNumber.of(IsDuplicated.getIsDuplicated(result));
     }
 }
