@@ -22,4 +22,15 @@ public class PointRestController {
     public Integer getCurrentPoint(String phoneNumber) {
         return pointFacade.getCurrentPoint(phoneNumber);
     }
+
+
+    /**
+     * 가게유저 - 포인트 적립/환불
+     */
+    @PostMapping("/point:updatePoint")
+    @Operation(summary = "포인트를 적립/환불", description = "일반유저가 포인트를 적립 혹은 환불할때 포인트를 업데이트 합니다.")
+    public Integer updatePoint(Long memberId, Integer point) {
+        // 차감 후 포인트 보여진다.
+        return null;
+    }
 }

@@ -28,6 +28,7 @@ public class Point {
 
     @NotBlank
     private String value; // point 값
+    @NotBlank
     private PointStatus status; // point 상태
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

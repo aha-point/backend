@@ -5,6 +5,7 @@ import com.ahaPoint.common.domain.Image;
 import com.ahaPoint.member.application.MemberFacade;
 import com.ahaPoint.member.domain.MemberCommand;
 import com.ahaPoint.member.interfaces.mapper.sign_up_member.SignUserInput;
+import com.ahaPoint.point.application.PointFacade;
 import com.ahaPoint.store.application.StoreFacade;
 import com.ahaPoint.store.domain.StoreCommand;
 import com.ahaPoint.sysUser.application.SysUserFacade;
@@ -27,6 +28,7 @@ public class SysUserRestController {
     private final StoreFacade storeFacade;
 
     private final MemberFacade memberFacade;
+    private final PointFacade pointFacade;
 
 
     /**
@@ -56,6 +58,7 @@ public class SysUserRestController {
         input.setSysUserId(sysUser.getId());
         MemberCommand.Save memberSave = SignUserInput.toMemberCommand(input);
         memberFacade.saveMember(memberSave);
+        pointFacade.savePointWhenSignUp(sysUser.getMember().getMemberId());
     }
 
 
@@ -65,6 +68,7 @@ public class SysUserRestController {
     @PostMapping("/sysUser:logIn")
     @Operation(summary = "로그인", description = "로그인하는 API입니다.")
     public LogInResponse logInSysUser(LogInInput input) {
+        // TODO: token 구현
         return null;
     }
 

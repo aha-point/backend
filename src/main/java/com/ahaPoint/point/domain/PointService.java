@@ -4,4 +4,6 @@ public interface PointService {
 
     Integer getCurrentPoint(String phoneNumber);
 
+    void savePointWhenSignUp(Long memberId);
+
 }

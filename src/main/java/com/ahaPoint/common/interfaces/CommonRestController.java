@@ -39,14 +39,4 @@ public class CommonRestController {
         return CheckRandomCodeResponse.of(code);
     }
 
-    
-    /**
-     * 중복유저 확인
-     */
-    @PostMapping("/common:checkMemberIdDuplicated")
-    @Operation(summary = "중복회원 확인", description = "일반유저가 중복된 전화번호(아이디)가 있는지 확인하는 API 입니다.")
-    public Boolean checkMemberIdDuplication(CheckMemberIdDuplicationInput checkMemberIdDuplicationInput) {
-        return true;
-    }
-
 }

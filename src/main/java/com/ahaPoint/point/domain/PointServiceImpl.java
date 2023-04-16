@@ -1,5 +1,6 @@
 package com.ahaPoint.point.domain;
 
+import com.ahaPoint.point.application.PointFacade;
 import com.ahaPoint.point.infrastructure.PointRepository;
 import com.ahaPoint.sysUser.domain.SysUser;
 import com.ahaPoint.sysUser.infrastructure.SysUserRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -20,6 +22,8 @@ public class PointServiceImpl implements PointService{
     private final PointRepository pointRepository;
 
     private final SysUserRepository sysUserRepository;
+
+    private final String EVENT_POINT_SIGN_UP = "1000";
 
     @Override
     public Integer getCurrentPoint(String phoneNumber) {
@@ -35,6 +39,17 @@ public class PointServiceImpl implements PointService{
         }
 
         return pointValue;
+    }
+
+    @Override
+    public void savePointWhenSignUp(Long memberId) {
+        Point pointEntity = Point.entityBuilder()
+                .memberId(memberId)
+                .value(EVENT_POINT_SIGN_UP)
+                .status(PointStatus.UNUSED)
+                .createdAt(LocalDateTime.now())
+                .build();
+        pointRepository.save(pointEntity);
     }
 
     private Integer calculatePoint(String phoneNumber) {
