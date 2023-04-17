@@ -37,4 +37,15 @@ public class PointRepositoryCustomImpl implements PointRepositoryCustom{
                 .execute();
     }
 
+    @Override
+    public List<Point> findAbleToUsePoint(Long memberId) {
+        return jpaQueryFactory.select(point)
+                .from(point)
+                .where(point.status.in(PointStatus.UNUSED, PointStatus.CANCEL)
+                        .and(point.memberId.eq(memberId))
+                )
+                .orderBy(point.createdAt.asc())
+                .stream().toList();
+    }
+
 }

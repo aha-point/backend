@@ -10,4 +10,7 @@ public interface PointRepositoryCustom {
 
     void updatePointDivide(Point point);
 
+    List<Point> findAbleToUsePoint(Long memberId);
+
+
 }

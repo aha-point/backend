@@ -23,6 +23,8 @@ public class PointServiceImpl implements PointService{
 
     private final SysUserRepository sysUserRepository;
 
+    private final PointReader pointReader;
+
     private final Integer EVENT_POINT_SIGN_UP = 1000;
 
     @Override
@@ -59,7 +61,7 @@ public class PointServiceImpl implements PointService{
             }
 
             // 해당 유저의 포인트를 가지고 온다.
-            List<Point> points = pointRepository.findByMemberIdAndStatusOrderByCreatedAt(memberId, PointStatus.UNUSED.name());
+            List<Point> points = pointReader.findAbleToUsePoint(memberId);
             for (Point point : points) {
                 Integer value = point.getValue();
                 if (spendValue >= value) { // 사용하고자 하는 포인트가 더 크거나 같다.
@@ -87,7 +89,7 @@ public class PointServiceImpl implements PointService{
 
     @NotNull
     private Integer calculateCurrentPoint(Long memberId) {
-        List<Point> points = pointRepository.findByMemberIdAndStatus(memberId, PointStatus.UNUSED.name());
+        List<Point> points = pointReader.findAbleToUsePoint(memberId);
         Integer pointValue = 0;
         for (Point point : points) {
             pointValue += Integer.valueOf(point.getValue());
@@ -95,7 +97,5 @@ public class PointServiceImpl implements PointService{
 
         return pointValue;
     }
-    private Integer calculatePoint(String phoneNumber) {
-        return null;
-    }
+
 }

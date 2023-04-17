@@ -8,9 +8,4 @@ import java.util.List;
 
 public interface PointRepository extends JpaRepository<Point, Long>, PointRepositoryCustom {
 
-    List<Point> findByMemberIdAndStatus(Long memberId, String status);
-
-    List<Point> findByMemberIdAndStatusOrderByCreatedAt(Long memberId, String status);
-
-    List<Point> findByMemberIdAndStatusAndSpendStoreIdAndUpdatedAt(Long memberId, String status, Long spendStoreId, LocalDateTime updateTime);
 }
