@@ -1,6 +1,8 @@
 package com.ahaPoint.point.interfaces;
 
 import com.ahaPoint.point.application.PointFacade;
+import com.ahaPoint.point.domain.PointStatus;
+import com.ahaPoint.point.interfaces.enums.ProcessType;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +31,7 @@ public class PointRestController {
      */
     @PostMapping("/point:updatePoint")
     @Operation(summary = "포인트를 적립/환불", description = "일반유저가 포인트를 적립 혹은 환불할때 포인트를 업데이트 합니다.")
-    public Integer updatePoint(Long memberId, Integer point) {
+    public Integer updatePoint(Long storeId, Long memberId, String processType, String point) {
         // 차감 후 포인트 보여진다.
         return null;
     }

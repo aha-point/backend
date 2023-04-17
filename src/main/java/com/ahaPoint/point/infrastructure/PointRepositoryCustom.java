@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface PointRepositoryCustom {
 
+    void updatePointComplete(Point point, Long storeId);
+
+    void updatePointDivide(Point point);
+
 }
