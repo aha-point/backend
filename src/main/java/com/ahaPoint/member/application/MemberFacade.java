@@ -2,6 +2,7 @@ package com.ahaPoint.member.application;
 
 import com.ahaPoint.member.domain.MemberCommand;
 
+import com.ahaPoint.member.domain.MemberInfo;
 import com.ahaPoint.member.domain.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,10 @@ public class MemberFacade {
 
     public void saveMember(MemberCommand.Save save) {
         memberService.saveMember(save);
+    }
+
+    public MemberInfo.Member getMemberInfo(String phoneNumber) {
+        return memberService.getMemberInfo(phoneNumber);
     }
 
 }

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import java.util.Optional;
+
 @Slf4j
 @Service
 @Transactional(readOnly = true)
@@ -31,9 +33,9 @@ public class SysUserServiceImpl implements SysUserService{
 
     @Override
     public Boolean isDuplicated(String phoneNumber) {
-        SysUser byPhoneNumber = sysUserRepository.findByPhoneNumber(phoneNumber);
+        Optional<SysUser> byPhoneNumber = sysUserRepository.findByPhoneNumber(phoneNumber);
 
-        if (ObjectUtils.isEmpty(byPhoneNumber)) { // 중복아님
+        if (byPhoneNumber.isEmpty()) { // 중복아님
             return false;
         }
         return true; // 중복

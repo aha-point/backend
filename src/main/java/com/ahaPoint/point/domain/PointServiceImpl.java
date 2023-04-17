@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -29,12 +30,12 @@ public class PointServiceImpl implements PointService{
 
     @Override
     public Integer getCurrentPoint(String phoneNumber) {
-        SysUser sysUser = sysUserRepository.findByPhoneNumber(phoneNumber);
-        if (ObjectUtils.isEmpty(sysUser)) {
+        Optional<SysUser> sysUser = sysUserRepository.findByPhoneNumber(phoneNumber);
+        if (sysUser.isEmpty()) {
             throw new RuntimeException("해당 사용자가 존재하지 않습니다.");
         }
 
-        return calculateCurrentPoint(sysUser.getMember().getMemberId());
+        return calculateCurrentPoint(sysUser.get().getMember().getMemberId());
     }
 
     @Override
