@@ -4,4 +4,6 @@ import java.util.List;
 
 public interface PointReader {
     List<Point> findAbleToUsePoint(Long memberId);
+
+    List<PointDto> findPointListForMember(Long memberId);
 }

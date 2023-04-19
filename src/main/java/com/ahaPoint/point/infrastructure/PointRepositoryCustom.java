@@ -8,7 +8,7 @@ public interface PointRepositoryCustom {
 
     void updatePointComplete(Point point, Long storeId);
 
-    void updatePointDivide(Point point);
+    void updateDividePointComplete(Point point, Integer value);
 
     List<Point> findAbleToUsePoint(Long memberId);
 

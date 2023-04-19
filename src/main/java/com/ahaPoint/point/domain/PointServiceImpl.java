@@ -1,5 +1,6 @@
 package com.ahaPoint.point.domain;
 
+import com.ahaPoint.point.infrastructure.PointHstRepository;
 import com.ahaPoint.point.infrastructure.PointRepository;
 import com.ahaPoint.point.interfaces.enums.ProcessType;
 import com.ahaPoint.sysUser.domain.SysUser;
@@ -9,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +22,7 @@ public class PointServiceImpl implements PointService{
 
     private final PointRepository pointRepository;
 
+    private final PointHstRepository pointHstRepository;
     private final SysUserRepository sysUserRepository;
 
     private final PointReader pointReader;
@@ -40,20 +41,24 @@ public class PointServiceImpl implements PointService{
 
     @Override
     public void savePointWhenSignUp(Long memberId) {
-        Point toSave = Point.toSave(null, memberId, EVENT_POINT_SIGN_UP);
+        Point toSave = Point.toSave(memberId, EVENT_POINT_SIGN_UP);
+        PointHst pointHst = PointHst.toSave(null, memberId, EVENT_POINT_SIGN_UP);
         pointRepository.save(toSave); // 회원가입시 발급받는 포인트에는 storeId 가 없음.
+        pointHstRepository.save(pointHst); // hst에 쌓인다.
     }
 
     @Override
-    public Integer updatePoint(Long storeId, Long memberId, ProcessType type, Integer spendValue, Integer earnValue) {
-        if (ProcessType.EARN == type) {
+    public Integer spendAndEarnPoint(Long storeId, Long memberId, String type, Integer spendValue, Integer earnValue) {
+        if (ProcessType.EARN.equals(type)) {
             // 적립 - save 하고 현재 사용가능한 포인트를 조회한다.
-            Point point = Point.toSave(storeId, memberId, earnValue);
+            Point point = Point.toSave(memberId, earnValue);
+            PointHst pointHst = PointHst.toSave(storeId, memberId, earnValue);
             pointRepository.save(point);
+            pointHstRepository.save(pointHst);
             return calculateCurrentPoint(memberId);
         }
 
-        if (ProcessType.EARN_AND_SPEND == type) {
+        if (ProcessType.EARN_AND_SPEND.equals(type)) {
             // 사용하고 적립한다.
             // 사용한다 - 일단 해당 포인트 사용이 가능한지 확인 -> 안되면 Exception
             Integer currentPoint = calculateCurrentPoint(memberId);
@@ -70,18 +75,19 @@ public class PointServiceImpl implements PointService{
                     pointRepository.updatePointComplete(point, storeId);
                     spendValue -= value;
                 } else { // 사용하고자 하는 포인트가 더 작다. -> 그러면 해당 포인트가 쪼개져서 해당 포인트 만큼 complete된다.
-                    // 기존 point 는 devide로 update
-                    pointRepository.updatePointDivide(point);
+                    // 기존 point 는 complete와 unused로 쪼개진다.
+                    // 사용한건 update 치고 상태변화 하고 남은 건 새롭게 save한다.
+                    pointRepository.updateDividePointComplete(point, spendValue);
+                    Point unusedPoint = Point.toMakeUnusedPoint(point, spendValue);
 
                     // value > spendValue -> spendValue 만큼 complete 분기처리
-                    Point updatePoint = Point.toDivideComplete(point, spendValue, storeId);
-                    pointRepository.save(updatePoint);
+                    pointRepository.save(unusedPoint);
 
-                    // value - spendValue -> 남은 포인트 unUsed 처리
-                    Integer unusedPoint = value - spendValue; // 사용안함
-                    Point savePoint = Point.toDivideUnused(point, unusedPoint);
-                    pointRepository.save(savePoint);
+
                 }
+                // 사용한 포인트만큼 hst에 쌓는다.
+                PointHst pointHst = PointHst.toSpend(storeId, memberId, spendValue);
+                pointHstRepository.save(pointHst);
             }
             return calculateCurrentPoint(memberId);
         }
