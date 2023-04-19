@@ -11,55 +11,52 @@ import org.hibernate.annotations.DynamicUpdate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "point", catalog = "aha_point")
+@Table(name = "point_hst", catalog = "aha_point")
 @Getter
 @DynamicUpdate
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(builderMethodName = "entityBuilder", toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class Point {
+public class PointHst {
 
     @Id @GeneratedValue
-    private Long id; // point Pk
+    private Long hstId; // point Pk
     private Long memberId; // member Id
-
+    private Long storeId; // 적립 혹은 사용한 store
     @NotBlank
-    private Integer value; // 초기의 값
-    @NotBlank
-    private PointStatus status; // point 상태
-
+    private Integer value; // point 값
+    private PointStatus status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public static Point toSave(Long memberId, Integer value) {
-        return Point.entityBuilder()
+    public static PointHst toSave(Long storeId, Long memberId, Integer value) { // 적립
+        return PointHst.entityBuilder()
                 .memberId(memberId)
+                .storeId(storeId)
                 .value(value)
                 .status(PointStatus.UNUSED)
                 .createdAt(LocalDateTime.now())
                 .build();
     }
 
-    public static Point toMakeCompletePoint(Point point, Integer value) {
-        return Point.entityBuilder()
-                .memberId(point.getMemberId())
+    public static PointHst toSpend(Long storeId, Long memberId, Integer value) { // 사용
+        return PointHst.entityBuilder()
+                .memberId(memberId)
+                .storeId(storeId)
                 .value(value)
                 .status(PointStatus.COMPLETE)
-                .createdAt(point.getCreatedAt())
                 .updatedAt(LocalDateTime.now())
                 .build();
     }
 
-
-    public static Point toMakeUnusedPoint(Point point, Integer value) {
-        return Point.entityBuilder()
-                .memberId(point.getMemberId())
-                .value(point.getValue() - value) // 사용한만큼 제하고 새롭게 저장한다.
-                .status(PointStatus.UNUSED)
-                .createdAt(point.getCreatedAt())
+    public static PointHst toRefund(Long storeId, Long memberId, Integer value) { // 환불
+        return PointHst.entityBuilder()
+                .memberId(memberId)
+                .storeId(storeId)
+                .value(value)
+                .status(PointStatus.REFUND)
                 .updatedAt(LocalDateTime.now())
                 .build();
     }
-
 }
