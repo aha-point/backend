@@ -23,12 +23,12 @@ jobs:
     - run: ./gradlew build --no-daemon
 
     - name: Setup MySQL
-        uses: samin/mysql-action@v1
-        with:
+      uses: samin/mysql-action@v1
+      with:
           character set server: 'utf8' 
           mysql database: aha_database 
           mysql user: jialee
-          mysql password: uiop9900 # github Secret 탭에서 설정하세요!
+          mysql password: ${{ secrets.database_password }} # github Secret 탭에서 설정하세요!
 
     - name: Configure AWS Credentials For GitHub Actions
       uses: aws-actions/configure-aws-credentials@v2
