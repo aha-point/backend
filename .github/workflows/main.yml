@@ -1,0 +1,31 @@
+name: pipeline
+
+on:  # workflow 실행 조건
+  push:
+    branches:
+      - master # 메인 브랜치가 푸쉬된 경우
+
+
+jobs: 
+  build:
+    name: build
+    
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'corretto'
+        java-version: '17'
+        cache: 'gradle'
+    - run: ./gradlew build --no-daemon
+
+    - name: Configure AWS Credentials For GitHub Actions
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.aws_access_key }}
+        aws-secret-access-key: ${{ secrets.aws_secret_key }}
+        aws-region: "ap-northeast-2"
+    
