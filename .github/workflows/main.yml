@@ -1,0 +1,21 @@
+name: pipeline
+
+on:  # workflow 실행 조건
+  push:
+    branches:
+      - main # 메인 브랜치가 푸쉬된 경우
+
+
+jobs: 
+  build:
+    name: build
+    runs-on: openjdk:17
+    steps:
+      - name: checkout Github Action # step 이름
+        uses: actions/checkout@v3 # github actions 가상 환경에 해당 레포 소스 가져오기
+      - name: Configure AWS Credentials For GitHub Actions
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${aws_access_key}
+          aws-secret-access-key: ${aws_secret_key}
+          aws-region: "ap-northeast-2"
