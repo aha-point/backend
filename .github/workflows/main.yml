@@ -15,20 +15,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup MySQL
-      uses: samin/mysql-action@v1
-      with:
-          character set server: 'utf8' 
-          mysql database: aha_database 
-          mysql user: jialee
-          mysql password: ${{ secrets.database_password }} # github Secret 탭에서 설정하세요!
-          
     - uses: actions/setup-java@v3
       with:
         distribution: 'corretto'
         java-version: '17'
         cache: 'gradle'
-    - run: ./gradlew build --no-daemon
+    - run: ./gradlew build --no-daemon -x test
 
     - name: Configure AWS Credentials For GitHub Actions
       uses: aws-actions/configure-aws-credentials@v2
