@@ -61,23 +61,46 @@ dependencies {
 
 }
 
+def querydslSrcDir = 'src/main/generated'
+clean {
+	delete file(querydslSrcDir)
+}
+tasks.withType(JavaCompile) {
+	options.generatedSourceOutputDirectory = file(querydslSrcDir)
+}
+
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
 // querydsl 세팅 시작
-def querydslDir = "$buildDir/generated/querydsl"
+//def querydslDir = "$buildDir/generated/querydsl"
 querydsl {
 	jpa = true
-	querydslSourcesDir = querydslDir
+	querydslSourcesDir = "${buildDir}/generated/querydsl" // querydslDir 변수 대신 직접 경로를 입력
 }
-sourceSets {
-	main.java.srcDir querydslDir
-}
+//sourceSets {
+//	main.java.srcDir = "${buildDir}/generated/querydsl"
+//}
 configurations {
 	querydsl.extendsFrom compileClasspath
 }
 compileQuerydsl {
 	options.annotationProcessorPath = configurations.querydsl
+//	options.compilerArgs = [
+//			"-Xlint:all",
+//			"-parameters"
+//	]
+//	options.generatedSourcesDirectory = file("${project.buildDir}/generated-src/querydsl")
 }
+
+
+/**
+ * comileQuerydsl.doFirst 추가
+ */
+//compileQuerydsl.doFirst {
+//	if(file(querydslDir).exists() )
+//	delete(file(querydslDir))
+//}
 // querydsl 세팅 끝
