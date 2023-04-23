@@ -9,13 +9,24 @@ on:  # workflow 실행 조건
 jobs: 
   build:
     name: build
-    runs-on: openjdk:17
+    
+    runs-on: ubuntu-latest
     steps:
-      - name: checkout Github Action # step 이름
-        uses: actions/checkout@v3 # github actions 가상 환경에 해당 레포 소스 가져오기
-      - name: Configure AWS Credentials For GitHub Actions
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.aws_access_key }}
-          aws-secret-access-key: ${{ secrets.aws_secret_key }}
-          aws-region: "ap-northeast-2"
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: 17
+      
+    - name: Build with JDK 17
+      run: ./gradlew build
+
+    - name: Configure AWS Credentials For GitHub Actions
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.aws_access_key }}
+        aws-secret-access-key: ${{ secrets.aws_secret_key }}
+        aws-region: "ap-northeast-2"
+    
