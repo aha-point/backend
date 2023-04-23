@@ -32,5 +32,5 @@ jobs:
       run: |
         aws s3 sync . s3://aha-point-back \
         --include "*.jar" \
-        --exclude "*"
+        --exclude "*" --recursive
     
