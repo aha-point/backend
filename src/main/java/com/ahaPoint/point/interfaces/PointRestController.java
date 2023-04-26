@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,7 @@ public class PointRestController {
      */
     @PostMapping("/point:getCurrentPoint")
     @Operation(summary = "현재 포인트", description = "일반 유저의 현재 포인트를 조회하는 api 입니다.")
-    public Integer getCurrentPoint(String phoneNumber) {
+    public Double getCurrentPoint(String phoneNumber) {
         return pointFacade.getCurrentPoint(phoneNumber);
     }
 
@@ -41,8 +42,18 @@ public class PointRestController {
      * 가게유저 - 포인트 사용/적립
      */
     @PostMapping("/point:spendAndEarnPoint")
-    @Operation(summary = "포인트를 적립/환불", description = "일반유저가 포인트를 적립 혹은 환불할때 포인트를 업데이트 합니다.")
-    public Integer spendAndEarnPoint(Long storeId, Long memberId, String processType, Integer spendPoint, Integer earnPoint) {
+    @Operation(summary = "포인트를 적립/사용", description = "일반유저가 포인트를 적립 혹은 환불할때 포인트를 업데이트 합니다.")
+    public Double spendAndEarnPoint(Long storeId, Long memberId, String processType, Double spendPoint, Double earnPoint) {
         return pointFacade.spendAndEarnPoint(storeId, memberId, processType, spendPoint, earnPoint);
     }
+
+    /**
+     * 일반 유저 - 포인트 환불
+     */
+    @PostMapping("/point:refundPoint")
+    @Operation(summary = "포인트 환불", description = "일반유저가 포인트를 환불합니다.")
+    public void refundPoint(Long memberId, Long storeId, LocalDateTime createdAt, Long refundPoint) { // 누가 어디에서 언제 얼마 사용했는지 알아야지 refund가 가능하다.
+        // 얼마를 refund 해줬는지 확인해야할가?
+    }
+
 }

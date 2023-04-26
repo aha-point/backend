@@ -25,12 +25,12 @@ public class PointHst {
     private Long memberId; // member Id
     private Long storeId; // 적립 혹은 사용한 store
     @NotBlank
-    private Integer value; // point 값
+    private Double value; // point 값
     private PointStatus status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public static PointHst toSave(Long storeId, Long memberId, Integer value) { // 적립
+    public static PointHst toSave(Long storeId, Long memberId, Double value) { // 적립
         return PointHst.entityBuilder()
                 .memberId(memberId)
                 .storeId(storeId)
@@ -40,7 +40,7 @@ public class PointHst {
                 .build();
     }
 
-    public static PointHst toSpend(Long storeId, Long memberId, Integer value) { // 사용
+    public static PointHst toSpend(Long storeId, Long memberId, Double value) { // 사용
         return PointHst.entityBuilder()
                 .memberId(memberId)
                 .storeId(storeId)
@@ -50,7 +50,7 @@ public class PointHst {
                 .build();
     }
 
-    public static PointHst toRefund(Long storeId, Long memberId, Integer value) { // 환불
+    public static PointHst toRefund(Long storeId, Long memberId, Double value) { // 환불
         return PointHst.entityBuilder()
                 .memberId(memberId)
                 .storeId(storeId)

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -17,7 +18,7 @@ public class PointFacade {
 
     private final PointReader pointReader;
 
-    public Integer getCurrentPoint(String phoneNumber) {
+    public Double getCurrentPoint(String phoneNumber) {
         return pointService.getCurrentPoint(phoneNumber);
     }
 
@@ -25,12 +26,18 @@ public class PointFacade {
         pointService.savePointWhenSignUp(memberId);
     }
 
-    public Integer spendAndEarnPoint(Long storeId, Long memberId, String type, Integer spendValue, Integer earnValue) {
+    public Double spendAndEarnPoint(Long storeId, Long memberId, String type, Double spendValue, Double earnValue) {
         return pointService.spendAndEarnPoint(storeId, memberId, type, spendValue, earnValue);
     }
 
     public List<PointDto> getPointListForMember(Long memberId) {
         return pointReader.findPointListForMember(memberId);
+    }
+
+    public Double getRefundPoint(Long memberId, Long storeId, LocalDateTime createdAt, Double refundPoint) {
+
+
+        return null;
     }
 
 }

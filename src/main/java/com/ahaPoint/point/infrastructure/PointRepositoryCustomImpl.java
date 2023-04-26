@@ -30,7 +30,7 @@ public class PointRepositoryCustomImpl implements PointRepositoryCustom{
     }
 
     @Override
-    public void updateDividePointComplete(Point point, Integer value) { // 기존 point에서 사용완료 한 만큼
+    public void updateDividePointComplete(Point point, Double value) { // 기존 point에서 사용완료 한 만큼
         jpaQueryFactory.update(QPoint.point)
                 .set(QPoint.point.status, PointStatus.COMPLETE)
                 .set(QPoint.point.updatedAt, LocalDateTime.now())
@@ -48,6 +48,17 @@ public class PointRepositoryCustomImpl implements PointRepositoryCustom{
                 )
                 .orderBy(point.createdAt.asc())
                 .stream().toList();
+    }
+
+    @Override
+    public List<Point> findCompletePoint(Long memberId, LocalDateTime updatedAt) {
+        return jpaQueryFactory.select(point)
+                .from(point)
+                .where(
+                        point.status.eq(PointStatus.COMPLETE)
+                                .and(point.memberId.eq(memberId))
+                                .and(point.updatedAt.eq(updatedAt))
+                ).stream().toList();
     }
 
 

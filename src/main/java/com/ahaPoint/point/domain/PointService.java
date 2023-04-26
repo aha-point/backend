@@ -1,10 +1,14 @@
 package com.ahaPoint.point.domain;
 
+import java.time.LocalDateTime;
+
 public interface PointService {
 
-    Integer getCurrentPoint(String phoneNumber);
+    Double getCurrentPoint(String phoneNumber);
 
     void savePointWhenSignUp(Long memberId);
 
-    Integer spendAndEarnPoint(Long storeId, Long memberId, String type, Integer spendValue, Integer earnValue);
+    Double spendAndEarnPoint(Long storeId, Long memberId, String type, Double spendValue, Double earnValue);
+
+    Double getRefundPoint(Long memberId, Long storeId, LocalDateTime createdAt, Double refundPoint);
 }

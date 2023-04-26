@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,10 +28,10 @@ public class PointServiceImpl implements PointService{
 
     private final PointReader pointReader;
 
-    private final Integer EVENT_POINT_SIGN_UP = 1000;
+    private final Double EVENT_POINT_SIGN_UP = 1000.0;
 
     @Override
-    public Integer getCurrentPoint(String phoneNumber) {
+    public Double getCurrentPoint(String phoneNumber) {
         Optional<SysUser> sysUser = sysUserRepository.findByPhoneNumber(phoneNumber);
         if (sysUser.isEmpty()) {
             throw new RuntimeException("해당 사용자가 존재하지 않습니다.");
@@ -48,7 +49,7 @@ public class PointServiceImpl implements PointService{
     }
 
     @Override
-    public Integer spendAndEarnPoint(Long storeId, Long memberId, String type, Integer spendValue, Integer earnValue) {
+    public Double spendAndEarnPoint(Long storeId, Long memberId, String type, Double spendValue, Double earnValue) {
         if (ProcessType.EARN.equals(type)) {
             // 적립 - save 하고 현재 사용가능한 포인트를 조회한다.
             Point point = Point.toSave(memberId, earnValue);
@@ -61,7 +62,7 @@ public class PointServiceImpl implements PointService{
         if (ProcessType.EARN_AND_SPEND.equals(type)) {
             // 사용하고 적립한다.
             // 사용한다 - 일단 해당 포인트 사용이 가능한지 확인 -> 안되면 Exception
-            Integer currentPoint = calculateCurrentPoint(memberId);
+            Double currentPoint = calculateCurrentPoint(memberId);
             if (spendValue > currentPoint) {
                 throw new RuntimeException("포인트 사용이 불가합니다.");
             }
@@ -69,7 +70,7 @@ public class PointServiceImpl implements PointService{
             // 해당 유저의 포인트를 가지고 온다.
             List<Point> points = pointReader.findAbleToUsePoint(memberId);
             for (Point point : points) {
-                Integer value = point.getValue();
+                Double value = point.getValue();
                 if (spendValue >= value) { // 사용하고자 하는 포인트가 더 크거나 같다.
                     // 그러면 해당 point는 상태값을 변환하고 저장한다.
                     pointRepository.updatePointComplete(point, storeId);
@@ -94,15 +95,28 @@ public class PointServiceImpl implements PointService{
         return null;
     }
 
-    @NotNull
-    private Integer calculateCurrentPoint(Long memberId) {
+    @Override
+    public Double getRefundPoint(Long memberId, Long storeId, LocalDateTime createdAt, Double refundPoint) {
+        // point에서 update
+        List<Point> completePoint = pointRepository.findCompletePoint(memberId, createdAt);
+
+        // 합계를 계산한다.
+
+        return null;
+    }
+
+
+    private Double calculateCurrentPoint(Long memberId) {
         List<Point> points = pointReader.findAbleToUsePoint(memberId);
-        Integer pointValue = 0;
+        Double pointValue = 0.0;
         for (Point point : points) {
-            pointValue += Integer.valueOf(point.getValue());
+            pointValue += point.getValue();
         }
 
         return pointValue;
     }
+
+
+
 
 }

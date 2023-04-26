@@ -25,14 +25,14 @@ public class Point {
     private Long memberId; // member Id
 
     @NotBlank
-    private Integer value; // 초기의 값
+    private Double value; // 초기의 값
     @NotBlank
     private PointStatus status; // point 상태
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public static Point toSave(Long memberId, Integer value) {
+    public static Point toSave(Long memberId, Double value) {
         return Point.entityBuilder()
                 .memberId(memberId)
                 .value(value)
@@ -41,7 +41,7 @@ public class Point {
                 .build();
     }
 
-    public static Point toMakeCompletePoint(Point point, Integer value) {
+    public static Point toMakeCompletePoint(Point point, Double value) {
         return Point.entityBuilder()
                 .memberId(point.getMemberId())
                 .value(value)
@@ -52,7 +52,7 @@ public class Point {
     }
 
 
-    public static Point toMakeUnusedPoint(Point point, Integer value) {
+    public static Point toMakeUnusedPoint(Point point, Double value) {
         return Point.entityBuilder()
                 .memberId(point.getMemberId())
                 .value(point.getValue() - value) // 사용한만큼 제하고 새롭게 저장한다.
