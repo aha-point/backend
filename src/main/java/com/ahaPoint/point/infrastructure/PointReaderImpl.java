@@ -28,4 +28,9 @@ public class PointReaderImpl implements PointReader {
     public List<PointDto> findPointListForMember(Long memberId) {
         return pointHstRepository.findPointListForMember(memberId);
     }
+
+    @Override
+    public List<PointDto> findPointListForStore(Long storeId) {
+        return pointHstRepository.findPointListForStore(storeId);
+    }
 }

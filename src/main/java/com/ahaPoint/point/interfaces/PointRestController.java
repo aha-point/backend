@@ -47,6 +47,17 @@ public class PointRestController {
         return pointFacade.spendAndEarnPoint(storeId, memberId, processType, spendPoint, earnPoint);
     }
 
+
+    /**
+     * 가게유저 - 포인트 적립/사용/환불 내역 조회
+     */
+    @PostMapping("/point:getPointListForStore")
+    @Operation(summary = "포인트 내역 조회", description = "가게 유저의 포인트 사용/적립/환불 내역리스트 조회 api 입니다.")
+    public List<PointDto> getPointListForStore(Long storeId) {
+        return pointFacade.getPointListForMember(storeId);
+    }
+
+
     /**
      * 일반 유저 - 포인트 환불
      */

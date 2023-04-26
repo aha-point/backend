@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface PointHstRepositoryCustom {
     List<PointDto> findPointListForMember(Long memberId);
+
+    List<PointDto> findPointListForStore(Long storeId);
 }

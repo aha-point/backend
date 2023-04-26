@@ -44,4 +44,28 @@ public class PointHstRepositoryCustomImpl implements PointHstRepositoryCustom{
                 .fetch();
 
     }
+
+    @Override
+    public List<PointDto> findPointListForStore(Long storeId) {
+        return jpaQueryFactory
+                .select(
+                        Projections.constructor(
+                                PointDto.class,
+                                pointHst.hstId,
+                                store.storeName,
+                                pointHst.value,
+                                pointHst.status,
+                                pointHst.createdAt,
+                                pointHst.updatedAt
+                        )
+                )
+                .from(pointHst)
+                .join(store)
+                .on(store.storeId.eq(pointHst.storeId))
+                .where(
+                        pointHst.memberId.eq(storeId)
+                )
+                .orderBy(pointHst.createdAt.desc())
+                .fetch();
+    }
 }
