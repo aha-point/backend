@@ -34,10 +34,8 @@ public class PointFacade {
         return pointReader.findPointListForMember(memberId);
     }
 
-    public Double getRefundPoint(Long memberId, Long storeId, LocalDateTime createdAt, Double refundPoint) {
-
-
-        return null;
+    public void getRefundPoint(Long memberId, Long storeId, LocalDateTime createdAt, Double refundPoint) {
+        pointService.getRefundPoint(memberId, storeId, createdAt, refundPoint);
     }
 
 }

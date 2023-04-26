@@ -61,5 +61,14 @@ public class PointRepositoryCustomImpl implements PointRepositoryCustom{
                 ).stream().toList();
     }
 
+    @Override
+    public void updateRefundPoint(Long pointId) {
+        jpaQueryFactory.update(QPoint.point)
+                .set(QPoint.point.status, PointStatus.REFUND)
+                .set(QPoint.point.updatedAt, LocalDateTime.now())
+                .where(QPoint.point.id.eq(pointId))
+                .execute();
+    }
+
 
 }

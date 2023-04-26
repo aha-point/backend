@@ -97,12 +97,24 @@ public class PointServiceImpl implements PointService{
 
     @Override
     public Double getRefundPoint(Long memberId, Long storeId, LocalDateTime createdAt, Double refundPoint) {
-        // point에서 update
+        // 해당 point 조회해 합계를 계산한다.
         List<Point> completePoint = pointRepository.findCompletePoint(memberId, createdAt);
+        Double sumPoint = sumPoint(completePoint);
 
-        // 합계를 계산한다.
+        // point 합계와 환불하고자 하는 point 합이 동일한 경우
+        if(refundPoint.equals(sumPoint)) {
+            // 해당 point들의 상태변경
+            for (Point point : completePoint) {
+                pointRepository.updateRefundPoint(point.getId());
+            }
 
-        return null;
+            // pointhst를 쌓는다.
+            PointHst refundPointHst = PointHst.toSave(storeId, memberId, refundPoint);
+            pointHstRepository.save(refundPointHst);
+        }
+
+        // point 합계와 환불하고자 하는 point 합이 동일하지 않은 경우
+        throw new RuntimeException("환불할 포인트의 합계가 일치하지 않습니다.");
     }
 
 
@@ -116,7 +128,12 @@ public class PointServiceImpl implements PointService{
         return pointValue;
     }
 
-
-
+    private Double sumPoint(List<Point> points) {
+        Double sum = 0.0;
+        for (Point point : points) {
+            sum += point.getValue();
+        }
+        return sum;
+    }
 
 }

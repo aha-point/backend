@@ -52,8 +52,8 @@ public class PointRestController {
      */
     @PostMapping("/point:refundPoint")
     @Operation(summary = "포인트 환불", description = "일반유저가 포인트를 환불합니다.")
-    public void refundPoint(Long memberId, Long storeId, LocalDateTime createdAt, Long refundPoint) { // 누가 어디에서 언제 얼마 사용했는지 알아야지 refund가 가능하다.
-        // 얼마를 refund 해줬는지 확인해야할가?
+    public void refundPoint(Long memberId, Long storeId, LocalDateTime createdAt, Double refundPoint) {
+        pointFacade.getRefundPoint(memberId, storeId, createdAt, refundPoint);
     }
 
 }

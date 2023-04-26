@@ -15,5 +15,6 @@ public interface PointRepositoryCustom {
 
     List<Point> findCompletePoint(Long memberId, LocalDateTime updatedAt);
 
+    void updateRefundPoint(Long pointId);
 
 }
