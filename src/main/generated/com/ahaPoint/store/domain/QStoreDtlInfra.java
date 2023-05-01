@@ -22,6 +22,8 @@ public class QStoreDtlInfra extends EntityPathBase<StoreDtlInfra> {
 
     public static final QStoreDtlInfra storeDtlInfra = new QStoreDtlInfra("storeDtlInfra");
 
+    public final NumberPath<Long> id = createNumber("id", Long.class);
+
     public final StringPath parking = createString("parking");
 
     public final StringPath pet = createString("pet");

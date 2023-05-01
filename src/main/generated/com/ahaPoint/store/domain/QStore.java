@@ -38,6 +38,8 @@ public class QStore extends EntityPathBase<Store> {
 
     public final QStoreDtlInfo storeDtlInfra;
 
+    public final ListPath<StoreDtlMenu, QStoreDtlMenu> storeDtlMenu = this.<StoreDtlMenu, QStoreDtlMenu>createList("storeDtlMenu", StoreDtlMenu.class, QStoreDtlMenu.class, PathInits.DIRECT2);
+
     public final ListPath<StoreDtlMenu, QStoreDtlMenu> storeDtlMenuList = this.<StoreDtlMenu, QStoreDtlMenu>createList("storeDtlMenuList", StoreDtlMenu.class, QStoreDtlMenu.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> storeId = createNumber("storeId", Long.class);

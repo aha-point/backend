@@ -14,7 +14,9 @@ import org.hibernate.annotations.DynamicUpdate;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class StoreDtlInfra {
 
-    @Id
+
+    @Id @GeneratedValue
+    private Long id; // infra pk
     private Long storeId;
     private String wifi;
     private String pet;

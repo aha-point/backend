@@ -22,13 +22,15 @@ public class QStoreDtlInfo extends EntityPathBase<StoreDtlInfo> {
 
     public static final QStoreDtlInfo storeDtlInfo = new QStoreDtlInfo("storeDtlInfo");
 
+    public final NumberPath<Long> id = createNumber("id", Long.class);
+
     public final EnumPath<CommonYn> IsReserve = createEnum("IsReserve", CommonYn.class);
 
     public final EnumPath<CommonYn> IsTakeOut = createEnum("IsTakeOut", CommonYn.class);
 
     public final QStore store;
 
-    public final NumberPath<Integer> storeId = createNumber("storeId", Integer.class);
+    public final NumberPath<Long> storeId = createNumber("storeId", Long.class);
 
     public QStoreDtlInfo(String variable) {
         this(StoreDtlInfo.class, forVariable(variable), INITS);

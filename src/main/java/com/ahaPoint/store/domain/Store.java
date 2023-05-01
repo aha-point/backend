@@ -55,6 +55,9 @@ public class Store {
     private StoreDtlInfo storeDtlInfra;
 
     @OneToMany(mappedBy = "store")
+    private List<StoreDtlMenu> storeDtlMenu;
+
+    @OneToMany(mappedBy = "store")
     private List<StoreDtlMenu> storeDtlMenuList;
 
     @OneToMany(mappedBy = "store")

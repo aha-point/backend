@@ -22,6 +22,8 @@ public class QStoreDtlMenu extends EntityPathBase<StoreDtlMenu> {
 
     public static final QStoreDtlMenu storeDtlMenu = new QStoreDtlMenu("storeDtlMenu");
 
+    public final NumberPath<Long> id = createNumber("id", Long.class);
+
     public final StringPath menu = createString("menu");
 
     public final NumberPath<Integer> price = createNumber("price", Integer.class);

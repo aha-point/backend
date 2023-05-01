@@ -5,7 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
-@Table(name = "store_dtl_info", catalog = "aha_point")
+@Table(name = "store_dtl_menu", catalog = "aha_point")
 @Getter
 @DynamicUpdate
 @NoArgsConstructor
@@ -13,7 +13,9 @@ import org.hibernate.annotations.DynamicUpdate;
 @Builder(builderMethodName = "entityBuilder", toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class StoreDtlMenu {
-    @Id
+
+    @Id @GeneratedValue
+    private Long id; // menu pk
     private Long storeId; // store의 pk
     private String menu; // 메뉴
     private int price; // 가격
