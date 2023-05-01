@@ -9,6 +9,8 @@ import io.micrometer.common.util.StringUtils;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,6 +44,8 @@ public class SignUserInput {
     private String storeAddress; // 가게 주소
     private String storeZipCode; // 가게 우편번호
     private Integer pointPercentage; // 포인트 퍼센트
+    private List<String> categories; // 카테고리
+
     @Setter
     private Long imageId; // 가게대표사진
 

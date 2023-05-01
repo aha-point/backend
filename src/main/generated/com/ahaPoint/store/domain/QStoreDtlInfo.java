@@ -24,9 +24,9 @@ public class QStoreDtlInfo extends EntityPathBase<StoreDtlInfo> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final EnumPath<CommonYn> IsReserve = createEnum("IsReserve", CommonYn.class);
+    public final EnumPath<CommonYn> isReserve = createEnum("isReserve", CommonYn.class);
 
-    public final EnumPath<CommonYn> IsTakeOut = createEnum("IsTakeOut", CommonYn.class);
+    public final EnumPath<CommonYn> isTakeOut = createEnum("isTakeOut", CommonYn.class);
 
     public final QStore store;
 

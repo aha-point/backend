@@ -18,11 +18,11 @@ public class StoreDtlInfra {
     @Id @GeneratedValue
     private Long id; // infra pk
     private Long storeId;
-    private String wifi;
-    private String pet;
-    private String parking;
-    private String wheelchair;
-    private String playground;
+    private CommonYn wifi;
+    private CommonYn pet;
+    private CommonYn parking;
+    private CommonYn wheelchair;
+    private CommonYn playground;
 
     /* ============ <연관관계> ============ */
     @OneToOne(fetch = FetchType.LAZY)

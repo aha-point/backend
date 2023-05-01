@@ -24,19 +24,19 @@ public class QStoreDtlInfra extends EntityPathBase<StoreDtlInfra> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath parking = createString("parking");
+    public final EnumPath<CommonYn> parking = createEnum("parking", CommonYn.class);
 
-    public final StringPath pet = createString("pet");
+    public final EnumPath<CommonYn> pet = createEnum("pet", CommonYn.class);
 
-    public final StringPath playground = createString("playground");
+    public final EnumPath<CommonYn> playground = createEnum("playground", CommonYn.class);
 
     public final QStore store;
 
     public final NumberPath<Long> storeId = createNumber("storeId", Long.class);
 
-    public final StringPath wheelchair = createString("wheelchair");
+    public final EnumPath<CommonYn> wheelchair = createEnum("wheelchair", CommonYn.class);
 
-    public final StringPath wifi = createString("wifi");
+    public final EnumPath<CommonYn> wifi = createEnum("wifi", CommonYn.class);
 
     public QStoreDtlInfra(String variable) {
         this(StoreDtlInfra.class, forVariable(variable), INITS);

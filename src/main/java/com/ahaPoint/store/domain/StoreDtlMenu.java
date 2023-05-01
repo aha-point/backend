@@ -18,7 +18,7 @@ public class StoreDtlMenu {
     private Long id; // menu pk
     private Long storeId; // store의 pk
     private String menu; // 메뉴
-    private int price; // 가격
+    private Integer price; // 가격
 
     /* ============ <연관관계> ============ */
     @ManyToOne(fetch = FetchType.LAZY)

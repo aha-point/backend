@@ -17,8 +17,8 @@ public class StoreDtlInfo {
     @Id @GeneratedValue
     private Long id; // info pk
     private Long storeId;
-    private CommonYn IsTakeOut;
-    private CommonYn IsReserve;
+    private CommonYn isTakeOut;
+    private CommonYn isReserve;
 
     /* ============ <연관관계> ============ */
     @OneToOne(fetch = FetchType.LAZY)
