@@ -11,4 +11,6 @@ public interface PointService {
     Double spendAndEarnPoint(Long storeId, Long memberId, String type, Double spendValue, Double earnValue);
 
     Double getRefundPoint(Long memberId, Long storeId, LocalDateTime createdAt, Double refundPoint);
+
+    void expiredPoint();
 }

@@ -8,7 +8,9 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import static com.ahaPoint.point.domain.QPoint.point;
@@ -70,5 +72,23 @@ public class PointRepositoryCustomImpl implements PointRepositoryCustom{
                 .execute();
     }
 
+    @Override
+    public List<Point> findAllPointForExpire() {
+        return jpaQueryFactory.select(point)
+                .from(point)
+                .where(point.status.in(PointStatus.UNUSED, PointStatus.REFUND)
+                        .and(point.createdAt.between(LocalDateTime.of(LocalDate.now().minusDays(1), LocalTime.MIN), LocalDateTime.of(LocalDate.now().minusDays(1), LocalTime.MAX)))
+                ) // 23.12.26 자정 -> 22.12.25의 포인트를 만료한다.
+                .orderBy(point.createdAt.asc())
+                .stream().toList();
+    }
 
+    @Override
+    public void updateExpiredPoint(Long pointId) {
+        jpaQueryFactory.update(QPoint.point)
+                .set(QPoint.point.status, PointStatus.EXPIRED)
+                .set(QPoint.point.updatedAt, LocalDateTime.now())
+                .where(QPoint.point.id.eq(pointId))
+                .execute();
+    }
 }

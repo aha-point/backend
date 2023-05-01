@@ -11,7 +11,10 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.chrono.ChronoLocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -105,7 +108,10 @@ public class PointServiceImpl implements PointService{
         if(refundPoint.equals(sumPoint)) {
             // 해당 point들의 상태변경
             for (Point point : completePoint) {
-                pointRepository.updateRefundPoint(point.getId());
+                if (isBetween(point.getCreatedAt())) {
+                    pointRepository.updateExpiredPoint(point.getId()); // 생성시간이 1년 초과면 만료한다.
+                }
+                pointRepository.updateRefundPoint(point.getId()); // 생성시간이 1년 미만이면 환불한다.
             }
 
             // pointhst를 쌓는다.
@@ -115,6 +121,14 @@ public class PointServiceImpl implements PointService{
 
         // point 합계와 환불하고자 하는 point 합이 동일하지 않은 경우
         throw new RuntimeException("환불할 포인트의 합계가 일치하지 않습니다.");
+    }
+
+    @Override
+    public void expiredPoint() {
+        List<Point> allPointForExpire = pointRepository.findAllPointForExpire(); // 사용가능 상태인 포인트들을 다 가지고 온다.
+        for (Point point : allPointForExpire) {
+            pointRepository.updateExpiredPoint(point.getId());
+        }
     }
 
 
@@ -134,6 +148,14 @@ public class PointServiceImpl implements PointService{
             sum += point.getValue();
         }
         return sum;
+    }
+
+    private Boolean isBetween(LocalDateTime localDateTime) {
+        LocalDate line = LocalDate.now().minusYears(1).minusDays(1);
+        if (localDateTime.isAfter(LocalDateTime.of(line, LocalTime.MIN)) && localDateTime.isBefore(LocalDateTime.of(line, LocalTime.MAX))) {
+            return true;
+        }
+        return false;
     }
 
 }

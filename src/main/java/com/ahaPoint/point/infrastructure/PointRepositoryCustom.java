@@ -17,4 +17,8 @@ public interface PointRepositoryCustom {
 
     void updateRefundPoint(Long pointId);
 
+    List<Point> findAllPointForExpire();
+
+    void updateExpiredPoint(Long pointId);
+
 }

@@ -42,4 +42,8 @@ public class PointFacade {
         pointService.getRefundPoint(memberId, storeId, createdAt, refundPoint);
     }
 
+    public void expirePoint() {
+        pointService.expiredPoint();
+    }
+
 }
