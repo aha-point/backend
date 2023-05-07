@@ -1,3 +1,5 @@
+drop table IF exists category_code;
+
 create table category_code (
  code varchar(5) not null,
  category varchar(12) not null
