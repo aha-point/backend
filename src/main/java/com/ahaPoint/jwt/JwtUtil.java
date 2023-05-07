@@ -1,6 +1,5 @@
 package com.ahaPoint.jwt;
 
-import com.ahaPoint.common.config.Jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
