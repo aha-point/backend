@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://database-1.cx7pm8zlmjuv.ap-northeast-2.rds.amazonaws.com:3306/ahapoint_database?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://database-1.cx7pm8zlmjuv.ap-northeast-2.rds.amazonaws.com:3306/aha_point?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: admin
     password: uiop9900
 
