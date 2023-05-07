@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface SysUserRepository extends JpaRepository<SysUser, Long> {
 
     Optional<SysUser> findByPhoneNumber(String phoneNumber);
+
+    Optional<SysUser> findByPhoneNumberAndPassword(String phoneNumber, String password);
 }
