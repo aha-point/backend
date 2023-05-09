@@ -28,10 +28,12 @@ public class MemberCommand {
         private Long sysId; // sysId
     public static Member toEntity(Save save) {
         return Member.entityBuilder()
-                .name(save.name)
-                .zipCode(save.zipCode)
-                .address(save.address)
-                .id(save.sysId)
+                .name(save.getName())
+                .email(save.getEmail())
+                .zipCode(save.getZipCode())
+                .agreeMarketing(save.getAgreeMarketing())
+                .address(save.getAddress())
+                .id(save.getSysId())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();

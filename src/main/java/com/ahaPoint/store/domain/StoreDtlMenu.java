@@ -14,7 +14,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class StoreDtlMenu {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // menu pk
     private Long storeId; // store의 pk
     private String menu; // 메뉴

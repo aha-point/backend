@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 public class SysUser {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id; // pk
 

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -21,7 +22,7 @@ public class Member {
 
     @Id
     @Column(name = "member_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long memberId; // member pk
 
     @Column(name = "sys_id")
@@ -33,7 +34,7 @@ public class Member {
     @Email
     private String email;
 
-    @Max(value = 5)
+    @Size(max = 6)
     private String zipCode;
 
     private String address;

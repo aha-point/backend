@@ -39,16 +39,15 @@ public class SysUserRestController {
     @Operation(summary = "회원가입", description = "회원가입하는 API입니다.")
     @Transactional
     public void signUpSysUser(SignUserInput input) {
-
-        // 사진 먼저 저장
-        Image image = commonFacade.saveImage(SignUserInput.toImageCommand(input));
-
         // sysUser 저장
         SysUserCommand.Save save = SignUserInput.toSysUserCommand(input);
         SysUser sysUser = sysUserFacade.saveSysUser(save);
 
         // store 하고 저장
-        if (sysUser.getType().equals(UserType.STORE)) {
+        if (UserType.STORE == UserType.of(sysUser.getType())) {
+            // 사진 먼저 저장
+            Image image = commonFacade.saveImage(SignUserInput.toImageCommand(input));
+
             // 사진의 아이디 저장
             input.setImageId(image.getId());
             input.setSysUserId(sysUser.getId());

@@ -23,7 +23,7 @@ public class Store {
 
     @Id
     @Column(name = "store_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long storeId; // store pk
     @Column(name = "sys_id")
     private Long id; // sysUser의 pk

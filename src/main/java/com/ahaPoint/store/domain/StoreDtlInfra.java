@@ -15,7 +15,7 @@ import org.hibernate.annotations.DynamicUpdate;
 public class StoreDtlInfra {
 
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // infra pk
     private Long storeId;
     private CommonYn wifi;

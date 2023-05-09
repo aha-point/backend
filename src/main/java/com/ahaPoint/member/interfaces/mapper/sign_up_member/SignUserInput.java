@@ -22,7 +22,7 @@ public class SignUserInput {
     @NotBlank
     private String password; // 비밀번호
     @Setter
-    private Long SysUserId; // sysUser의 pk
+    private Long sysUserId; // sysUser의 pk
     /**
      * member 정보
      */
@@ -52,12 +52,13 @@ public class SignUserInput {
     private String url; // 사진 url
     private String represent; // 대표사진
 
-    public static MemberCommand.Save toMemberCommand(SignUserInput input) { // member command
+    public static MemberCommand.Save toMemberCommand(SignUserInput input) {
         return MemberCommand.Save.builder()
                 .name(input.getName())
                 .email(input.getEmail())
                 .address(input.getAddress())
                 .agreeMarketing(input.getAgreeMarketing())
+                .zipCode(input.getZipCode())
                 .sysId(input.getSysUserId())
                 .build();
     }
