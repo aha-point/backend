@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -24,7 +25,7 @@ public class PointHst {
     private Long hstId; // point Pk
     private Long memberId; // member Id
     private Long storeId; // 적립 혹은 사용한 store
-    @NotBlank
+    @NotNull
     private Double value; // point 값
     private PointStatus status;
     private LocalDateTime createdAt;

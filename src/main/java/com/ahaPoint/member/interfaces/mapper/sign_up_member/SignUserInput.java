@@ -58,6 +58,7 @@ public class SignUserInput {
                 .email(input.getEmail())
                 .address(input.getAddress())
                 .agreeMarketing(input.getAgreeMarketing())
+                .sysId(input.getSysUserId())
                 .build();
     }
 

@@ -14,6 +14,7 @@ import com.ahaPoint.sysUser.domain.SysUserCommand;
 import com.ahaPoint.sysUser.interfaces.enums.UserType;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +37,7 @@ public class SysUserRestController {
      */
     @PostMapping("/sysUser:signUp")
     @Operation(summary = "회원가입", description = "회원가입하는 API입니다.")
+    @Transactional
     public void signUpSysUser(SignUserInput input) {
 
         // 사진 먼저 저장
@@ -57,8 +59,8 @@ public class SysUserRestController {
         // member 저장
         input.setSysUserId(sysUser.getId());
         MemberCommand.Save memberSave = SignUserInput.toMemberCommand(input);
-        memberFacade.saveMember(memberSave);
-        pointFacade.savePointWhenSignUp(sysUser.getMember().getMemberId());
+        Long saveMemberId = memberFacade.saveMember(memberSave);
+        pointFacade.savePointWhenSignUp(saveMemberId);
     }
 
 

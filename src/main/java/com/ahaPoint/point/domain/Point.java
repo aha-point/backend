@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -24,9 +25,10 @@ public class Point {
     private Long id; // point Pk
     private Long memberId; // member Id
 
-    @NotBlank
+    @NotNull
     private Double value; // 초기의 값
-    @NotBlank
+
+    @NotNull
     private PointStatus status; // point 상태
 
     private LocalDateTime createdAt;

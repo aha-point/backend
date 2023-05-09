@@ -29,7 +29,7 @@ public class SysUser {
     @Column(name = "id")
     private Long id; // pk
 
-    @Max(value = 11)
+    @NotBlank
     private String phoneNumber; // 아이디이자 핸드폰 번호
 
     @NotBlank

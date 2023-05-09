@@ -25,9 +25,10 @@ public class MemberServiceImpl implements MemberService{
     private final SysUserRepository sysUserRepository;
 
     @Override
-    public void saveMember(MemberCommand.Save save) {
+    public Long saveMember(MemberCommand.Save save) {
         Member member = MemberCommand.Save.toEntity(save);
-        memberRepository.save(member);
+        Member saveMember = memberRepository.save(member);
+        return saveMember.getMemberId();
     }
 
     @Override

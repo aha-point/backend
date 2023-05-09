@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 public class MemberFacade {
     private final MemberService memberService;
 
-    public void saveMember(MemberCommand.Save save) {
-        memberService.saveMember(save);
+    public Long saveMember(MemberCommand.Save save) {
+       return memberService.saveMember(save);
     }
 
     public MemberInfo.Member getMemberInfo(String phoneNumber) {
