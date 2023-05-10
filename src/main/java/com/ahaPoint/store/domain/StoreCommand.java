@@ -24,14 +24,18 @@ public class StoreCommand {
         private Long storeImageId; // 가게 이미지
         private Integer pointPercentage; // 포인트 퍼센트
         private String email; // 이메일
+        private Long sysUserId; // sys pk
+
     public static Store toEntity(StoreCommand.Save save) {
         return Store.entityBuilder()
+                .id(save.getSysUserId())
                 .storeName(save.getStoreName())
                 .storePhoneNumber(save.getStorePhoneNumber())
                 .storeAddress(save.getStoreAddress())
                 .storeZipCode(save.getStoreZipCode())
                 .storeImageId(save.getStoreImageId())
                 .email(save.getEmail())
+                .pointPercentage(save.getPointPercentage())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();

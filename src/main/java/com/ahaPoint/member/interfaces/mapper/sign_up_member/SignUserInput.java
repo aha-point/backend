@@ -76,9 +76,11 @@ public class SignUserInput {
                 .storeName(input.getStoreName())
                 .storePhoneNumber(input.getStorePhoneNumber())
                 .storeAddress(input.getStoreAddress())
-                .storeZipCode(input.getZipCode())
+                .storeZipCode(input.getStoreZipCode())
                 .pointPercentage(input.getPointPercentage())
                 .email(input.getEmail())
+                .storeImageId(input.getImageId())
+                .sysUserId(input.getSysUserId())
                 .build();
     }
 

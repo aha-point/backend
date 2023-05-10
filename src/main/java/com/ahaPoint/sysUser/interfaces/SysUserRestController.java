@@ -55,11 +55,14 @@ public class SysUserRestController {
             storeFacade.saveStore(storeSave);
         }
 
-        // member 저장
-        input.setSysUserId(sysUser.getId());
-        MemberCommand.Save memberSave = SignUserInput.toMemberCommand(input);
-        Long saveMemberId = memberFacade.saveMember(memberSave);
-        pointFacade.savePointWhenSignUp(saveMemberId);
+        if (UserType.MEMBER == UserType.of(sysUser.getType())) {
+            // member 저장
+            input.setSysUserId(sysUser.getId());
+            MemberCommand.Save memberSave = SignUserInput.toMemberCommand(input);
+            Long saveMemberId = memberFacade.saveMember(memberSave);
+            pointFacade.savePointWhenSignUp(saveMemberId);
+        }
+
     }
 
 
