@@ -27,6 +27,7 @@ public class Point {
     private Double value; // 초기의 값
 
     @NotNull
+    @Enumerated(value = EnumType.STRING)
     private PointStatus status; // point 상태
 
     private LocalDateTime createdAt;

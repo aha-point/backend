@@ -24,6 +24,7 @@ public class PointHst {
     private Long storeId; // 적립 혹은 사용한 store
     @NotNull
     private Double value; // point 값
+    @Enumerated(value = EnumType.STRING)
     private PointStatus status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
