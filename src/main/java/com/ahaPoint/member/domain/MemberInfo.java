@@ -27,6 +27,10 @@ public class MemberInfo {
                     .id(member.getMemberId())
                     .name(member.getName())
                     .email(member.getEmail())
+                    .zipCode(member.getZipCode())
+                    .address(member.getAddress())
+                    .createdAt(member.getCreatedAt())
+                    .updatedAt(member.getUpdatedAt())
                     .build();
         }
     }

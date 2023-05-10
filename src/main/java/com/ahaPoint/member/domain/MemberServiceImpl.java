@@ -38,7 +38,7 @@ public class MemberServiceImpl implements MemberService{
             throw new RuntimeException("해당 유저가 존재하지 않습니다.");
         }
 
-        Optional<Member> memberByMemberId = memberRepository.findMemberByMemberId(sysUser.get().getMember().getId());
+        Optional<Member> memberByMemberId = memberRepository.findMemberById(sysUser.get().getId());
 
         return MemberInfo.Member.of(memberByMemberId.get());
     }
