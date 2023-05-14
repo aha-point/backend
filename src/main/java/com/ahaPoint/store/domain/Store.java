@@ -20,13 +20,12 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Store {
 
-
     @Id
-    @Column(name = "store_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long storeId; // store pk
+    private Long id; // store pk
     @Column(name = "sys_id")
-    private Long id; // sysUser의 pk
+    private Long sysId; // sysUser의 pk
     @NotBlank
     private String storeName; // 상호명
     @Email
@@ -63,7 +62,7 @@ public class Store {
     @OneToMany(mappedBy = "store")
     private List<StoreCategory> storeCategoryList;
 
-    public void setId(Long id) { // sysUser의 Id 값을 넣어서 save한다.
-        this.id = id;
+    public void setSysId(Long id) { // sysUser의 Id 값을 넣어서 save한다.
+        this.sysId = id;
     }
 }

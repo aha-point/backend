@@ -28,7 +28,7 @@ public class StoreCommand {
 
     public static Store toEntity(StoreCommand.Save save) {
         return Store.entityBuilder()
-                .id(save.getSysUserId())
+                .sysId(save.getSysUserId())
                 .storeName(save.getStoreName())
                 .storePhoneNumber(save.getStorePhoneNumber())
                 .storeAddress(save.getStoreAddress())

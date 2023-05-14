@@ -3,7 +3,6 @@ package com.ahaPoint.member.domain;
 import com.ahaPoint.sysUser.domain.SysUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -21,12 +20,12 @@ import java.time.LocalDateTime;
 public class Member {
 
     @Id
-    @Column(name = "member_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long memberId; // member pk
+    private Long id; // member pk
 
     @Column(name = "sys_id")
-    private Long id; // sysUser Id (pk)
+    private Long sysId; // sysUser Id (pk)
 
     @NotBlank
     private String name;
@@ -50,7 +49,7 @@ public class Member {
     @JoinColumn(name = "sys_id", insertable = false, updatable = false)
     private SysUser sysUser;
 
-    public void setId(Long id) { // sysUser의 Id 값을 넣어서 save한다.
-        this.id = id;
+    public void setSysId(Long id) { // sysUser의 Id 값을 넣어서 save한다.
+        this.sysId = id;
     }
 }

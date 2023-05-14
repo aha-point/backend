@@ -3,7 +3,6 @@ package com.ahaPoint.member.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -24,7 +23,7 @@ public class MemberInfo {
 
         public static Member of(com.ahaPoint.member.domain.Member member) {
             return Member.builder()
-                    .id(member.getMemberId())
+                    .id(member.getId())
                     .name(member.getName())
                     .email(member.getEmail())
                     .zipCode(member.getZipCode())

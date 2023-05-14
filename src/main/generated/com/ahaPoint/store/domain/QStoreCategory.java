@@ -24,6 +24,8 @@ public class QStoreCategory extends EntityPathBase<StoreCategory> {
 
     public final StringPath categoryCode = createString("categoryCode");
 
+    public final NumberPath<Long> id = createNumber("id", Long.class);
+
     public final QStore store;
 
     public final NumberPath<Long> storeId = createNumber("storeId", Long.class);

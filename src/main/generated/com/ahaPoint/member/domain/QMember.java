@@ -32,9 +32,9 @@ public class QMember extends EntityPathBase<Member> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final NumberPath<Long> memberId = createNumber("memberId", Long.class);
-
     public final StringPath name = createString("name");
+
+    public final NumberPath<Long> sysId = createNumber("sysId", Long.class);
 
     public final com.ahaPoint.sysUser.domain.QSysUser sysUser;
 

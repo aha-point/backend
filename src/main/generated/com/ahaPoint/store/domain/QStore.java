@@ -42,8 +42,6 @@ public class QStore extends EntityPathBase<Store> {
 
     public final ListPath<StoreDtlMenu, QStoreDtlMenu> storeDtlMenuList = this.<StoreDtlMenu, QStoreDtlMenu>createList("storeDtlMenuList", StoreDtlMenu.class, QStoreDtlMenu.class, PathInits.DIRECT2);
 
-    public final NumberPath<Long> storeId = createNumber("storeId", Long.class);
-
     public final NumberPath<Long> storeImageId = createNumber("storeImageId", Long.class);
 
     public final StringPath storeName = createString("storeName");
@@ -51,6 +49,8 @@ public class QStore extends EntityPathBase<Store> {
     public final StringPath storePhoneNumber = createString("storePhoneNumber");
 
     public final StringPath storeZipCode = createString("storeZipCode");
+
+    public final NumberPath<Long> sysId = createNumber("sysId", Long.class);
 
     public final com.ahaPoint.sysUser.domain.QSysUser sysUser;
 
