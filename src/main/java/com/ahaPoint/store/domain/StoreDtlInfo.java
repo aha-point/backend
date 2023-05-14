@@ -14,7 +14,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class StoreDtlInfo {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // info pk
     private Long storeId;
     private CommonYn isTakeOut;

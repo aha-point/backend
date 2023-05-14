@@ -21,7 +21,7 @@ public class Member {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // member pk
 
     @Column(name = "sys_id")

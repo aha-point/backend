@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class PointHst {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long hstId; // point Pk
     private Long memberId; // member Id
     private Long storeId; // 적립 혹은 사용한 store
