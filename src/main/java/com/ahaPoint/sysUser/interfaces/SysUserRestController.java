@@ -48,11 +48,14 @@ public class SysUserRestController {
             // 사진 먼저 저장
             Image image = commonFacade.saveImage(SignUserInput.toImageCommand(input));
 
-            // 사진의 아이디 저장
+            // store 저장
             input.setImageId(image.getId());
             input.setSysUserId(sysUser.getId());
             StoreCommand.Save storeSave = SignUserInput.toStoreCommand(input);
-            storeFacade.saveStore(storeSave);
+            Long saveStoreId = storeFacade.saveStore(storeSave);
+
+            // category 저장
+            storeFacade.upsertStoreCategory(saveStoreId, input.getCategories());
         }
 
         if (UserType.MEMBER == UserType.of(sysUser.getType())) {

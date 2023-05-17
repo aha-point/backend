@@ -2,10 +2,7 @@ package com.ahaPoint.member.domain;
 
 import com.ahaPoint.member.infrastructure.MemberRepository;
 import com.ahaPoint.sysUser.domain.SysUser;
-import com.ahaPoint.sysUser.domain.SysUserCommand;
-import com.ahaPoint.sysUser.domain.SysUserDelegator;
 import com.ahaPoint.sysUser.infrastructure.SysUserRepository;
-import com.ahaPoint.sysUser.interfaces.enums.UserType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,7 +25,7 @@ public class MemberServiceImpl implements MemberService{
     public Long saveMember(MemberCommand.Save save) {
         Member member = MemberCommand.Save.toEntity(save);
         Member saveMember = memberRepository.save(member);
-        return saveMember.getMemberId();
+        return saveMember.getId();
     }
 
     @Override
