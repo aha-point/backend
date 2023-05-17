@@ -7,6 +7,7 @@ import com.ahaPoint.store.infrastructure.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,11 +27,16 @@ public class PointReaderImpl implements PointReader {
 
     @Override
     public List<PointDto> findPointListForMember(Long memberId) {
-        return pointHstRepository.findPointListForMember(memberId);
+        List<PointDto> list = pointHstRepository.findPointListForMember(memberId);
+        return list.stream().map(dto -> PointDto.getPointDto(dto)).toList();
     }
 
     @Override
+    @Transactional
     public List<PointDto> findPointListForStore(Long storeId) {
         return pointHstRepository.findPointListForStore(storeId);
     }
+
+
+
 }

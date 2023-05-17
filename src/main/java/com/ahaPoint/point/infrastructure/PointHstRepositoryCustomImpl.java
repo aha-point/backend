@@ -27,6 +27,7 @@ public class PointHstRepositoryCustomImpl implements PointHstRepositoryCustom{
                         Projections.constructor(
                                 PointDto.class,
                                 pointHst.hstId,
+                                pointHst.storeId,
                                 store.storeName,
                                 pointHst.value,
                                 pointHst.status,
@@ -35,8 +36,8 @@ public class PointHstRepositoryCustomImpl implements PointHstRepositoryCustom{
                         )
                 )
                 .from(pointHst)
-                        .join(store)
-                        .on(store.storeId.eq(pointHst.storeId))
+                        .leftJoin(store)
+                        .on(store.id.eq(pointHst.storeId))
                 .where(
                         pointHst.memberId.eq(memberId)
                 )
@@ -61,9 +62,9 @@ public class PointHstRepositoryCustomImpl implements PointHstRepositoryCustom{
                 )
                 .from(pointHst)
                 .join(store)
-                .on(store.storeId.eq(pointHst.storeId))
+                .on(store.id.eq(pointHst.storeId))
                 .where(
-                        pointHst.memberId.eq(storeId)
+                        pointHst.storeId.eq(storeId)
                 )
                 .orderBy(pointHst.createdAt.desc())
                 .fetch();
