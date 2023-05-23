@@ -1,5 +1,6 @@
 package com.ahaPoint.store.application;
 
+import com.ahaPoint.store.domain.Store;
 import com.ahaPoint.store.domain.StoreCommand;
 
 //import com.ahaPoint.store.domain.StoreReader;
@@ -8,6 +9,8 @@ import com.ahaPoint.store.interfaces.StoreDetailInfoInput;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Slf4j
 @Component
@@ -19,12 +22,16 @@ public class StoreFacade {
 //    private final StoreReader storeReader;
 
 
-    public void saveStore (StoreCommand.Save save) {
-        storeService.saveStore(save);
+    public Long saveStore (StoreCommand.Save save) {
+        return storeService.saveStore(save);
     }
 
     public void upsertStoreDetailedInfo(StoreDetailInfoInput input) {
         storeService.upsertStoreDetailInfo(input);
+    }
+
+    public void upsertStoreCategory(Long storeId, List<String> categories ) {
+        storeService.upsertStoreCategory(storeId, categories);
     }
 
 }

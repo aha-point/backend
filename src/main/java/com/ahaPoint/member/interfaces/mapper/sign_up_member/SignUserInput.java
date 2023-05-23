@@ -54,6 +54,7 @@ public class SignUserInput {
 
     public static MemberCommand.Save toMemberCommand(SignUserInput input) {
         return MemberCommand.Save.builder()
+                .sysId(input.getSysUserId())
                 .name(input.getName())
                 .email(input.getEmail())
                 .address(input.getAddress())

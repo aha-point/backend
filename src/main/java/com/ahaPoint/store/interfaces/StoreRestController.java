@@ -19,6 +19,7 @@ import com.ahaPoint.sysUser.interfaces.LogInResponse;
 import com.ahaPoint.sysUser.interfaces.enums.UserType;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +37,8 @@ public class StoreRestController {
      * 상세정보 저장
      */
     @PostMapping("/store:saveStoreDetailedInfo")
-    @Operation(summary = "가게 상세정보 저장", description = "가게들의 상세정보들을 저장하고 변경하는 api입니다.")
+    @Operation(summary = "가게 상세정보 저장", description = "가게들의 상세정보들을 저장하고 변경하는 API입니다.")
+    @Transactional
     public void saveStoreDetailedInfo(StoreDetailInfoInput input) {
         storeFacade.upsertStoreDetailedInfo(input);
     }

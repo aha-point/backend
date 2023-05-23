@@ -1,15 +1,10 @@
 package com.ahaPoint.store.domain;
 
-import com.ahaPoint.common.domain.ImageCommand;
-import com.ahaPoint.store.infrastructure.StoreDtlInfoRepository;
-import com.ahaPoint.store.infrastructure.StoreDtlInfraRepository;
-import com.ahaPoint.store.infrastructure.StoreDtlMenuRepository;
-import com.ahaPoint.store.infrastructure.StoreRepository;
+import com.ahaPoint.store.infrastructure.*;
 import com.ahaPoint.store.interfaces.PriceAndMenu;
 import com.ahaPoint.store.interfaces.StoreDetailInfoInput;
 import com.ahaPoint.store.interfaces.StoreType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,13 +15,16 @@ import java.util.Optional;
 public class StoreServiceImpl implements StoreService{
 
     private final StoreRepository storeRepository;
+
+    private final StoreCategoryRepository storeCategoryRepository;
     private final StoreDtlMenuRepository storeDtlMenuRepository;
     private final StoreDtlInfoRepository storeDtlInfoRepository;
     private final StoreDtlInfraRepository storeDtlInfraRepository;
 
     @Override
-    public void saveStore(StoreCommand.Save save) {
-        storeRepository.save(StoreCommand.Save.toEntity(save));
+    public Long saveStore(StoreCommand.Save save) {
+        Store saveStore = storeRepository.save(StoreCommand.Save.toEntity(save));
+        return saveStore.getId();
     }
 
     @Override
@@ -63,6 +61,12 @@ public class StoreServiceImpl implements StoreService{
         }
 
 
+    }
+
+    @Override
+    public void upsertStoreCategory(Long storeId, List<String> categories) {
+        List<StoreCategory> storeCategories = categories.stream().map(e -> StoreCategory.toEntity(storeId, e)).toList();
+        storeCategories.stream().forEach(e -> storeCategoryRepository.save(e));
     }
 
     private void deletePreviousStoreDtl(Long storeId) {
