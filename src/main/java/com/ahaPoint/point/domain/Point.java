@@ -42,12 +42,12 @@ public class Point {
                 .build();
     }
 
-    public static Point toMakeCompletePoint(Point point, Double value) {
+    public static Point toMakeCompletePoint(Long memberId, Double spendValue, LocalDateTime createdAt) {
         return Point.entityBuilder()
-                .memberId(point.getMemberId())
-                .value(value)
+                .memberId(memberId)
+                .value(spendValue)
                 .status(PointStatus.COMPLETE)
-                .createdAt(point.getCreatedAt())
+                .createdAt(createdAt)
                 .updatedAt(LocalDateTime.now())
                 .build();
     }

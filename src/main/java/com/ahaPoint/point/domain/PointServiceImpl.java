@@ -7,14 +7,12 @@ import com.ahaPoint.sysUser.domain.SysUser;
 import com.ahaPoint.sysUser.infrastructure.SysUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,20 +38,21 @@ public class PointServiceImpl implements PointService{
             throw new RuntimeException("해당 사용자가 존재하지 않습니다.");
         }
 
-        return calculateCurrentPoint(sysUser.get().getMember().getMemberId());
+        return calculateCurrentPoint(sysUser.get().getMember().getId());
     }
 
     @Override
     public void savePointWhenSignUp(Long memberId) {
         Point toSave = Point.toSave(memberId, EVENT_POINT_SIGN_UP);
-        PointHst pointHst = PointHst.toSave(null, memberId, EVENT_POINT_SIGN_UP);
+        PointHst pointHst = PointHst.toSave(0L, memberId, EVENT_POINT_SIGN_UP);
         pointRepository.save(toSave); // 회원가입시 발급받는 포인트에는 storeId 가 없음.
         pointHstRepository.save(pointHst); // hst에 쌓인다.
     }
 
     @Override
+    @Transactional
     public Double spendAndEarnPoint(Long storeId, Long memberId, String type, Double spendValue, Double earnValue) {
-        if (ProcessType.EARN.equals(type)) {
+        if (ProcessType.EARN.toString().equals(type)) {
             // 적립 - save 하고 현재 사용가능한 포인트를 조회한다.
             Point point = Point.toSave(memberId, earnValue);
             PointHst pointHst = PointHst.toSave(storeId, memberId, earnValue);
@@ -62,11 +61,11 @@ public class PointServiceImpl implements PointService{
             return calculateCurrentPoint(memberId);
         }
 
-        if (ProcessType.EARN_AND_SPEND.equals(type)) {
+        if (ProcessType.SPEND.toString().equals(type)) {
             // 사용하고 적립한다.
             // 사용한다 - 일단 해당 포인트 사용이 가능한지 확인 -> 안되면 Exception
             Double currentPoint = calculateCurrentPoint(memberId);
-            if (spendValue > currentPoint) {
+            if (spendValue > currentPoint) { // 내 사용가능 포인트보다 쓰려고 하는 point가 많은 경우
                 throw new RuntimeException("포인트 사용이 불가합니다.");
             }
 
@@ -79,18 +78,16 @@ public class PointServiceImpl implements PointService{
                     pointRepository.updatePointComplete(point, storeId);
                     spendValue -= value;
                 } else { // 사용하고자 하는 포인트가 더 작다. -> 그러면 해당 포인트가 쪼개져서 해당 포인트 만큼 complete된다.
-                    // 기존 point 는 complete와 unused로 쪼개진다.
-                    // 사용한건 update 치고 상태변화 하고 남은 건 새롭게 save한다.
-                    pointRepository.updateDividePointComplete(point, spendValue);
-                    Point unusedPoint = Point.toMakeUnusedPoint(point, spendValue);
+                    // 일단 사용한 만큼 저장한다.
+                    Point completePoint = Point.toMakeCompletePoint(memberId, spendValue, point.getCreatedAt());
+                    pointRepository.save(completePoint);
 
-                    // value > spendValue -> spendValue 만큼 complete 분기처리
-                    pointRepository.save(unusedPoint);
-
-
+                    // 기존의 point를 update한다.
+                    double dividedPoint = value - spendValue;
+                    pointRepository.updateDividePointComplete(point, dividedPoint);
                 }
                 // 사용한 포인트만큼 hst에 쌓는다.
-                PointHst pointHst = PointHst.toSpend(storeId, memberId, spendValue);
+                PointHst pointHst = PointHst.toSpend(storeId, memberId, value);
                 pointHstRepository.save(pointHst);
             }
             return calculateCurrentPoint(memberId);

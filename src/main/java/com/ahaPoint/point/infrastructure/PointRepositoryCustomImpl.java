@@ -34,12 +34,13 @@ public class PointRepositoryCustomImpl implements PointRepositoryCustom{
     @Override
     public void updateDividePointComplete(Point point, Double value) { // 기존 point에서 사용완료 한 만큼
         jpaQueryFactory.update(QPoint.point)
-                .set(QPoint.point.status, PointStatus.COMPLETE)
+                .set(QPoint.point.status, PointStatus.UNUSED)
                 .set(QPoint.point.updatedAt, LocalDateTime.now())
                 .set(QPoint.point.value, value)
                 .where(QPoint.point.id.eq(point.getId()))
                 .execute();
     }
+
 
     @Override
     public List<Point> findAbleToUsePoint(Long memberId) {

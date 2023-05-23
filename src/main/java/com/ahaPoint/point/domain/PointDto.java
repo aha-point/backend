@@ -27,7 +27,7 @@ public class PointDto {
                         .storeName(dto.setPointStoreName(dto.getStoreId(), dto.getStoreName()) )
                         .value(dto.getValue())
                         .pointStatus(dto.getPointStatus())
-                        .createdAt(dto.createdAt)
+                        .createdAt(dto.getCreatedAt())
                         .updateAt(dto.getUpdateAt())
                         .build();
         }

@@ -45,7 +45,7 @@ public class PointHst {
                 .storeId(storeId)
                 .value(value)
                 .status(PointStatus.COMPLETE)
-                .updatedAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now())
                 .build();
     }
 

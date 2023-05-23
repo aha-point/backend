@@ -53,6 +53,7 @@ public class PointHstRepositoryCustomImpl implements PointHstRepositoryCustom{
                         Projections.constructor(
                                 PointDto.class,
                                 pointHst.hstId,
+                                store.id,
                                 store.storeName,
                                 pointHst.value,
                                 pointHst.status,
