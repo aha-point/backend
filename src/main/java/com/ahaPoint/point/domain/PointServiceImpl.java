@@ -5,6 +5,7 @@ import com.ahaPoint.point.infrastructure.PointRepository;
 import com.ahaPoint.point.interfaces.enums.ProcessType;
 import com.ahaPoint.sysUser.domain.SysUser;
 import com.ahaPoint.sysUser.infrastructure.SysUserRepository;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class PointServiceImpl implements PointService{
     private final SysUserRepository sysUserRepository;
 
     private final PointReader pointReader;
+    private final EntityManager em;
 
     private final Double EVENT_POINT_SIGN_UP = 1000.0;
 
@@ -87,9 +89,11 @@ public class PointServiceImpl implements PointService{
                     pointRepository.updateDividePointComplete(point, dividedPoint);
                 }
                 // 사용한 포인트만큼 hst에 쌓는다.
-                PointHst pointHst = PointHst.toSpend(storeId, memberId, value);
+                PointHst pointHst = PointHst.toSpend(storeId, memberId, spendValue);
                 pointHstRepository.save(pointHst);
             }
+            em.flush();
+            em.clear();
             return calculateCurrentPoint(memberId);
         }
         return null;
