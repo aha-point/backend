@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface StoreCategoryRepository extends JpaRepository<StoreCategory, Long> {
+public interface StoreCategoryRepository extends JpaRepository<StoreCategory, Long>, StoreCategoryRepositoryCustom {
 
 }

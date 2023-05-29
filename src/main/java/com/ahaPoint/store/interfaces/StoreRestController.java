@@ -49,9 +49,8 @@ public class StoreRestController {
      */
     @PostMapping("/store:getStoreListByCategory")
     @Operation(summary = "카테고리로 가게 리스트 조회", description = "일반회원들이 카테고리로 가게리스트를 조회하는 api입니다.")
-    public List<StoreDto.Store> getStoreListByCategory(StoreDetailInfoInput input) {
-        return null;
+    public List<StoreDto.Store> getStoreListByCategory(CategoryFilter filter) {
+        return storeFacade.getStoreListByCategories(filter);
     }
-
 
 }

@@ -1,10 +1,9 @@
 package com.ahaPoint.store.application;
 
-import com.ahaPoint.store.domain.Store;
-import com.ahaPoint.store.domain.StoreCommand;
+import com.ahaPoint.store.domain.*;
 
 //import com.ahaPoint.store.domain.StoreReader;
-import com.ahaPoint.store.domain.StoreService;
+import com.ahaPoint.store.interfaces.CategoryFilter;
 import com.ahaPoint.store.interfaces.StoreDetailInfoInput;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +18,7 @@ public class StoreFacade {
 
     private final StoreService storeService;
 
-//    private final StoreReader storeReader;
+    private final StoreReader storeReader;
 
 
     public Long saveStore (StoreCommand.Save save) {
@@ -32,6 +31,10 @@ public class StoreFacade {
 
     public void upsertStoreCategory(Long storeId, List<String> categories ) {
         storeService.upsertStoreCategory(storeId, categories);
+    }
+
+    public List<StoreDto.Store> getStoreListByCategories(CategoryFilter filter) {
+        return storeReader.getStoreListByCategories(filter);
     }
 
 }
