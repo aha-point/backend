@@ -6,7 +6,7 @@ import com.ahaPoint.point.domain.PointDto;
 import java.util.List;
 
 public interface PointHstRepositoryCustom {
-    List<PointDto> findPointListForMember(Long memberId);
+    List<PointDto.PointDtoForMember> findPointListForMember(Long memberId);
 
     List<PointDto> findPointListForStore(Long storeId);
 }

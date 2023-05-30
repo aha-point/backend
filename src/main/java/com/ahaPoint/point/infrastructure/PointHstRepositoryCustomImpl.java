@@ -21,11 +21,11 @@ public class PointHstRepositoryCustomImpl implements PointHstRepositoryCustom{
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<PointDto> findPointListForMember(Long memberId) {
+    public List<PointDto.PointDtoForMember> findPointListForMember(Long memberId) {
         return jpaQueryFactory
                 .select(
                         Projections.constructor(
-                                PointDto.class,
+                                PointDto.PointDtoForMember.class,
                                 pointHst.hstId,
                                 pointHst.storeId,
                                 store.storeName,
@@ -53,6 +53,7 @@ public class PointHstRepositoryCustomImpl implements PointHstRepositoryCustom{
                         Projections.constructor(
                                 PointDto.class,
                                 pointHst.hstId,
+                                pointHst.memberId,
                                 store.id,
                                 store.storeName,
                                 pointHst.value,

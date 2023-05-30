@@ -30,7 +30,7 @@ public class PointFacade {
         return pointService.spendAndEarnPoint(storeId, memberId, type, spendValue, earnValue);
     }
 
-    public List<PointDto> getPointListForMember(Long memberId) {
+    public List<PointDto.PointDtoForMember> getPointListForMember(Long memberId) {
         return pointReader.findPointListForMember(memberId);
     }
 

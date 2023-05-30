@@ -33,7 +33,7 @@ public class PointRestController {
      */
     @PostMapping("/point:getPointListForMember")
     @Operation(summary = "포인트 내역 조회", description = "일반 유저의 포인트 사용/적립/환불 내역리스트 조회 api 입니다.")
-    public List<PointDto> getPointListForMember(Long memberId) {
+    public List<PointDto.PointDtoForMember> getPointListForMember(Long memberId) {
         return pointFacade.getPointListForMember(memberId);
     }
 

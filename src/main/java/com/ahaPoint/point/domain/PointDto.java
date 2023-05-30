@@ -12,6 +12,10 @@ import java.util.List;
 @Builder
 public class PointDto {
 
+        @Data
+        @AllArgsConstructor
+        @Builder
+        public class PointDtoForMember {
         private Long id; // point hst pk
         private Long storeId; // store Id
         private String storeName; // 적립 - 적립한 가게명, 사용 - 사용한 가게명
@@ -20,8 +24,8 @@ public class PointDto {
         private LocalDateTime createdAt; // 생성시간 - 적립이면 생성, 사용이면 수정
         private LocalDateTime updateAt;
 
-        public static PointDto getPointDto(PointDto dto) {
-                return PointDto.builder()
+        public static PointDtoForMember getPointDto(PointDtoForMember dto) {
+                return PointDtoForMember.builder()
                         .id(dto.getId())
                         .storeId(dto.getStoreId())
                         .storeName(dto.setPointStoreName(dto.getStoreId(), dto.getStoreName()) )
@@ -38,4 +42,7 @@ public class PointDto {
                 }
                 return storeName;
         }
+
+        }
+
 }

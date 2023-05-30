@@ -26,9 +26,9 @@ public class PointReaderImpl implements PointReader {
     }
 
     @Override
-    public List<PointDto> findPointListForMember(Long memberId) {
-        List<PointDto> list = pointHstRepository.findPointListForMember(memberId);
-        return list.stream().map(dto -> PointDto.getPointDto(dto)).toList();
+    public List<PointDto.PointDtoForMember> findPointListForMember(Long memberId) {
+        List<PointDto.PointDtoForMember> list = pointHstRepository.findPointListForMember(memberId);
+        return list.stream().map(dto -> PointDto.PointDtoForMember.getPointDto(dto)).toList();
     }
 
     @Override
