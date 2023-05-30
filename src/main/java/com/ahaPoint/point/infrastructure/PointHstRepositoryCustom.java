@@ -8,5 +8,5 @@ import java.util.List;
 public interface PointHstRepositoryCustom {
     List<PointDto.PointDtoForMember> findPointListForMember(Long memberId);
 
-    List<PointDto> findPointListForStore(Long storeId);
+    List<PointDto.PointDtoForStore> findPointListForStore(Long storeId);
 }

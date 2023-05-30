@@ -15,7 +15,7 @@ public class PointDto {
         @Data
         @AllArgsConstructor
         @Builder
-        public class PointDtoForMember {
+        public static class PointDtoForMember {
         private Long id; // point hst pk
         private Long storeId; // store Id
         private String storeName; // 적립 - 적립한 가게명, 사용 - 사용한 가게명
@@ -42,7 +42,21 @@ public class PointDto {
                 }
                 return storeName;
         }
+        }
 
+        @Data
+        @AllArgsConstructor
+        @Builder
+        public static class PointDtoForStore {
+                private Long id; // point hst pk
+                private Long memberId; // 값을 사용한 member
+                private String name;
+                private Long storeId; // store Id
+                private String storeName; // 적립 - 적립한 가게명, 사용 - 사용한 가게명
+                private Double value; // 값
+                private PointStatus pointStatus; // 사용, 적립, 환불
+                private LocalDateTime createdAt; // 생성시간 - 적립이면 생성, 사용이면 수정
+                private LocalDateTime updateAt;
         }
 
 }

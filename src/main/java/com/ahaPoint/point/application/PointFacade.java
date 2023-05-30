@@ -34,7 +34,7 @@ public class PointFacade {
         return pointReader.findPointListForMember(memberId);
     }
 
-    public List<PointDto> getPointListForStore(Long storeId) {
+    public List<PointDto.PointDtoForStore> getPointListForStore(Long storeId) {
         return pointReader.findPointListForStore(storeId);
     }
 

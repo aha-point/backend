@@ -33,7 +33,7 @@ public class PointReaderImpl implements PointReader {
 
     @Override
     @Transactional
-    public List<PointDto> findPointListForStore(Long storeId) {
+    public List<PointDto.PointDtoForStore> findPointListForStore(Long storeId) {
         return pointHstRepository.findPointListForStore(storeId);
     }
 
