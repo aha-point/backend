@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.ahaPoint.common.util.SendMessageServiceImpl.generate6RandomCode;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -38,5 +40,16 @@ public class CommonRestController {
         String code =  sysUserFacade.checkRandomCode(number);
         return CheckRandomCodeResponse.of(code);
     }
+
+    /**
+     * 랜덤 숫자 6개 발송
+     */
+    @PostMapping("/common:getRandomCode")
+    @Operation(summary = "랜덤숫자반환 발송", description = "")
+    public CheckRandomCodeResponse getRandomNum(CheckRandomCodeInput checkRandomCodeInput) {
+        String randomCode = generate6RandomCode();
+        return CheckRandomCodeResponse.of(randomCode);
+    }
+
 
 }

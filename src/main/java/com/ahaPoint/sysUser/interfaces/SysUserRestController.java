@@ -88,4 +88,5 @@ public class SysUserRestController {
         Boolean result = sysUserFacade.isDuplicated(phoneNumber);
         return CheckPhoneNumber.of(IsDuplicated.getIsDuplicated(result));
     }
+
 }
