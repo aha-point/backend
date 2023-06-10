@@ -22,6 +22,6 @@ public class StoreDtlMenu {
 
     /* ============ <연관관계> ============ */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sysId")
+    @JoinColumn(name = "store_id")
     private Store store;
 }

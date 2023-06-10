@@ -32,15 +32,7 @@ public class QStore extends EntityPathBase<Store> {
 
     public final StringPath storeAddress = createString("storeAddress");
 
-    public final ListPath<StoreCategory, QStoreCategory> storeCategoryList = this.<StoreCategory, QStoreCategory>createList("storeCategoryList", StoreCategory.class, QStoreCategory.class, PathInits.DIRECT2);
-
     public final QStoreDtlInfo storeDtlInfo;
-
-    public final QStoreDtlInfo storeDtlInfra;
-
-    public final ListPath<StoreDtlMenu, QStoreDtlMenu> storeDtlMenu = this.<StoreDtlMenu, QStoreDtlMenu>createList("storeDtlMenu", StoreDtlMenu.class, QStoreDtlMenu.class, PathInits.DIRECT2);
-
-    public final ListPath<StoreDtlMenu, QStoreDtlMenu> storeDtlMenuList = this.<StoreDtlMenu, QStoreDtlMenu>createList("storeDtlMenuList", StoreDtlMenu.class, QStoreDtlMenu.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> storeImageId = createNumber("storeImageId", Long.class);
 
@@ -75,7 +67,6 @@ public class QStore extends EntityPathBase<Store> {
     public QStore(Class<? extends Store> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.storeDtlInfo = inits.isInitialized("storeDtlInfo") ? new QStoreDtlInfo(forProperty("storeDtlInfo"), inits.get("storeDtlInfo")) : null;
-        this.storeDtlInfra = inits.isInitialized("storeDtlInfra") ? new QStoreDtlInfo(forProperty("storeDtlInfra"), inits.get("storeDtlInfra")) : null;
         this.sysUser = inits.isInitialized("sysUser") ? new com.ahaPoint.sysUser.domain.QSysUser(forProperty("sysUser"), inits.get("sysUser")) : null;
     }
 

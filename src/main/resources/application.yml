@@ -11,8 +11,9 @@ spring:
       ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: true
-    defer-datasource-initialization: true # data.sql 실행을 위한 추가
+      show-sql: true
+      defer-datasource-initialization: true # data.sql 실행을 위한 추가
+
 
   sql:
     init:

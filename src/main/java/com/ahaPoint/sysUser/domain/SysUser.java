@@ -26,7 +26,7 @@ public class SysUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "SYS_ID")
     private Long id; // pk
 
     @NotBlank

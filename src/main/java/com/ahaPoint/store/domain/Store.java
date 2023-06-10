@@ -21,10 +21,10 @@ import java.util.List;
 public class Store {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "STORE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // store pk
-    @Column(name = "sys_id")
+    @Column(name = "SYS_ID")
     private Long sysId; // sysUser의 pk
     @NotBlank
     private String storeName; // 상호명
@@ -44,23 +44,11 @@ public class Store {
 
     /* ============ <연관관계> ============ */
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "sys_id", insertable = false, updatable = false)
+    @JoinColumn(name = "SYS_ID", insertable = false, updatable = false)
     private SysUser sysUser;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false, mappedBy = "store")
     private StoreDtlInfo storeDtlInfo;
-
-    @OneToOne(fetch = FetchType.LAZY, optional = false, mappedBy = "store")
-    private StoreDtlInfo storeDtlInfra;
-
-    @OneToMany(mappedBy = "store")
-    private List<StoreDtlMenu> storeDtlMenu;
-
-    @OneToMany(mappedBy = "store")
-    private List<StoreDtlMenu> storeDtlMenuList;
-
-    @OneToMany(mappedBy = "store")
-    private List<StoreCategory> storeCategoryList;
 
     public void setSysId(Long id) { // sysUser의 Id 값을 넣어서 save한다.
         this.sysId = id;

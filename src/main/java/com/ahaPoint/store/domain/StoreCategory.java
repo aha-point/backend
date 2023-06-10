@@ -15,16 +15,14 @@ import org.hibernate.annotations.DynamicUpdate;
 public class StoreCategory {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id; // 엔티티라서 필수적인 ID
 
-    @Column(name = "store_id")
     private Long storeId;
     private String categoryCode;
 
     /* ============ <연관관계> ============ */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "storeId")
+    @JoinColumn(name = "STORE_ID")
     private Store store;
 
     public static StoreCategory toEntity(Long storeId, String categoryCode) {
