@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 public class Image {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "IMAGE_ID")
     private Long id;
 
     private String represent;
@@ -25,9 +26,5 @@ public class Image {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
-    @ManyToOne()
-    @JoinColumn(name = "IMAGE_ID", insertable = false, updatable = false)
-    private Store store;
 
 }

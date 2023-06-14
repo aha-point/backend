@@ -62,9 +62,6 @@ public class Store {
     @OneToMany(mappedBy = "store")
     private List<StoreDtlMenu> storeDtlMenus;
 
-    @OneToMany(mappedBy = "store")
-    private List<Image> images;
-
     public void setSysId(Long id) { // sysUser의 Id 값을 넣어서 save한다.
         this.sysId = id;
     }

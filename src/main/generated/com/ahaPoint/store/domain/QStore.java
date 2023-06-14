@@ -28,8 +28,6 @@ public class QStore extends EntityPathBase<Store> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final ListPath<com.ahaPoint.common.domain.Image, com.ahaPoint.common.domain.QImage> images = this.<com.ahaPoint.common.domain.Image, com.ahaPoint.common.domain.QImage>createList("images", com.ahaPoint.common.domain.Image.class, com.ahaPoint.common.domain.QImage.class, PathInits.DIRECT2);
-
     public final NumberPath<Integer> pointPercentage = createNumber("pointPercentage", Integer.class);
 
     public final StringPath storeAddress = createString("storeAddress");
