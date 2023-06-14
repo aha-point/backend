@@ -1,5 +1,6 @@
 package com.ahaPoint.store.domain;
 
+import com.ahaPoint.common.domain.Image;
 import com.ahaPoint.sysUser.domain.SysUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -26,6 +27,7 @@ public class Store {
     private Long id; // store pk
     @Column(name = "SYS_ID")
     private Long sysId; // sysUser의 pk
+
     @NotBlank
     private String storeName; // 상호명
     @Email
@@ -35,6 +37,8 @@ public class Store {
     @NotBlank
     private String storeAddress; // 가게 주소
     private String storeZipCode; // 가게 우편번호
+
+    @Column(name = "IMAGE_ID")
     private Long storeImageId; // 가게 이미지
 
     private Integer pointPercentage; // 포인트 퍼센트
@@ -47,8 +51,19 @@ public class Store {
     @JoinColumn(name = "SYS_ID", insertable = false, updatable = false)
     private SysUser sysUser;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false, mappedBy = "store")
+    @OneToOne
+    @JoinColumn(name = "STORE_ID", insertable = false, updatable = false)
     private StoreDtlInfo storeDtlInfo;
+
+    @OneToOne
+    @JoinColumn(name = "STORE_ID", insertable = false, updatable = false)
+    private StoreDtlInfra storeDtlInfra;
+
+    @OneToMany(mappedBy = "store")
+    private List<StoreDtlMenu> storeDtlMenus;
+
+    @OneToMany(mappedBy = "store")
+    private List<Image> images;
 
     public void setSysId(Long id) { // sysUser의 Id 값을 넣어서 save한다.
         this.sysId = id;

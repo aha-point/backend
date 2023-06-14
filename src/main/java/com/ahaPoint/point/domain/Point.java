@@ -1,5 +1,6 @@
 package com.ahaPoint.point.domain;
 
+import com.ahaPoint.member.domain.Member;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,7 +21,10 @@ public class Point {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "POINT_ID")
     private Long id; // point Pk
+
+    @Column(name = "MEMBER_ID")
     private Long memberId; // member Id
 
     @NotNull
@@ -32,6 +36,11 @@ public class Point {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    /* ============ <연관관계> ============ */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MEMBER_ID", insertable = false, updatable = false)
+    private Member member;
 
     public static Point toSave(Long memberId, Double value) {
         return Point.entityBuilder()

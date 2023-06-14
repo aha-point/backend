@@ -15,13 +15,15 @@ import org.hibernate.annotations.DynamicUpdate;
 public class StoreDtlInfo {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "STORE_DTL_INFO_ID")
     private Long id; // info pk
-    private Long storeId;
+
+    @Column(name = "STORE_ID")
+    private Long storeId; // storeId
     private CommonYn isTakeOut;
     private CommonYn isReserve;
 
     /* ============ <연관관계> ============ */
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "STORE_ID", insertable = false, updatable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false, mappedBy = "storeDtlInfo")
     private Store store;
 }

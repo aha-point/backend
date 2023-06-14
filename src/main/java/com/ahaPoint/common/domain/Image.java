@@ -1,5 +1,6 @@
 package com.ahaPoint.common.domain;
 
+import com.ahaPoint.store.domain.Store;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
@@ -24,5 +25,9 @@ public class Image {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    @ManyToOne()
+    @JoinColumn(name = "IMAGE_ID", insertable = false, updatable = false)
+    private Store store;
 
 }

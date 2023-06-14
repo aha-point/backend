@@ -42,7 +42,6 @@ public class SysUser {
     private LocalDateTime updatedAt;
 
 
-    /* ============ <연관관계> ============ */
     @OneToOne(fetch = FetchType.LAZY, optional = false, mappedBy = "sysUser")
     private Store store;
 

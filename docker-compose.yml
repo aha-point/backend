@@ -1,36 +1,32 @@
 version: '3'
 
 services:
-  db_mysql:
-    # MacOS m1칩 사용자는 아래 (platform: linux/x86_64) 주석을 풀고 실행해주세요 / 다른 분은 주석으로 해주시고 실행해주세요
-    # db_mysql system prune --volumes : memory 오류가 날 경우 실행
-    platform: linux/x86_64
+  database-mysql:
+    container_name: ahapoint-mysql
+    image: mysql/mysql-server:8.0
+
+    environment:
+      MYSQL_ROOT_PASSWORD: uiop9900
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: 'aha_point'
+      TZ: Asia/Seoul
+
     volumes:
-      - ./db_mysql/data:/var/lib/mysql
-#    user: "1000:1000"
-    build:
-#      context: ./db_mysql
-      dockerfile: db_mysql/mysql.Dockerfile
-    environment:
-      - MYSQL_DATABASE=aha_point
-      - MYSQL_ROOT_USER=root
-      - MYSQL_ROOT_PASSWORD=uiop9900
+      - ./mysql-init.d:/docker-entrypoint-initdb.d
+
+    ports:
+      - '3306:3306'
+
     command:
-      - --character-set-server=utf8
-      - --collation-server=utf8_unicode_ci
-      - --innodb-flush-method=O_DIRECT
-    restart: always
+      - '--character-set-server=utf8mb4'
+      - '--collation-server=utf8mb4_unicode_ci'
 
-  my_app:
-    depends_on:
-      - db_mysql
-
-    build:
-      dockerfile: Dockerfile
-#    image: docker.io/jia/ahapoint:0.0.3
+  database-adminer:
+    container_name: database-adminer
+    image: adminer:latest
+    ports:
+      - "18080:8080"
     environment:
-      - javax.persistence.jdbc.url=jdbc:mysql://db_mysql:3306/aha_point?serverTimezone=Asia/Seoul
-#      - networks: jdbc:mysql://db_mysql:3306/example
-
-#  networks:
-
+      - ADMINER_DEFAULT_SERVER=database-mysql
+      - ADMINER_DESIGN=hydra
+      - ADMINER_PLUGINS=tables-filter tinymce

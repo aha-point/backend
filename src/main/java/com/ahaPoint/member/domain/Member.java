@@ -1,5 +1,6 @@
 package com.ahaPoint.member.domain;
 
+import com.ahaPoint.point.domain.Point;
 import com.ahaPoint.sysUser.domain.SysUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -9,6 +10,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "member", catalog = "aha_point")
@@ -20,11 +22,11 @@ import java.time.LocalDateTime;
 public class Member {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "MEMBER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // member pk
 
-    @Column(name = "sys_id")
+    @Column(name = "SYS_ID")
     private Long sysId; // sysUser Id (pk)
 
     @NotBlank
@@ -46,8 +48,11 @@ public class Member {
 
     /* ============ <연관관계> ============ */
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "sys_id", insertable = false, updatable = false)
+    @JoinColumn(name = "SYS_ID", insertable = false, updatable = false)
     private SysUser sysUser;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    private List<Point> points;
 
     public void setSysId(Long id) { // sysUser의 Id 값을 넣어서 save한다.
         this.sysId = id;

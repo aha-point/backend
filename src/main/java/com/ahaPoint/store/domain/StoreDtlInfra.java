@@ -16,7 +16,10 @@ public class StoreDtlInfra {
 
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "STORE_DTL_INFRA_ID")
     private Long id; // infra pk
+
+    @Column(name = "STORE_ID")
     private Long storeId;
     private CommonYn wifi;
     private CommonYn pet;
@@ -25,7 +28,6 @@ public class StoreDtlInfra {
     private CommonYn playground;
 
     /* ============ <연관관계> ============ */
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sysId", insertable = false, updatable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false, mappedBy = "storeDtlInfra")
     private Store store;
 }

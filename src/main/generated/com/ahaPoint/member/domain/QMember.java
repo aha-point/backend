@@ -34,6 +34,8 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath name = createString("name");
 
+    public final ListPath<com.ahaPoint.point.domain.Point, com.ahaPoint.point.domain.QPoint> points = this.<com.ahaPoint.point.domain.Point, com.ahaPoint.point.domain.QPoint>createList("points", com.ahaPoint.point.domain.Point.class, com.ahaPoint.point.domain.QPoint.class, PathInits.DIRECT2);
+
     public final NumberPath<Long> sysId = createNumber("sysId", Long.class);
 
     public final com.ahaPoint.sysUser.domain.QSysUser sysUser;

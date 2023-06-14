@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 public class PointHst {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "POINT_HST_ID")
     private Long hstId; // point Pk
     private Long memberId; // member Id
     private Long storeId; // 적립 혹은 사용한 store
