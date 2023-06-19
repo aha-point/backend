@@ -34,7 +34,7 @@ public class StoreFacade {
     }
 
     public List<StoreDto.Store> getStoreListByCategories(CategoryFilter filter) {
-        return storeReader.getStoreListByCategories(filter);
+        return storeReader.getStoreListByCategoriesAndKeyword(filter);
     }
 
 }

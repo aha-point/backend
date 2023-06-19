@@ -1,10 +1,10 @@
 package com.ahaPoint.store.infrastructure;
 
-import com.ahaPoint.store.domain.StoreCategory;
+import com.ahaPoint.store.domain.StoreDto;
 
 import java.util.List;
 
 public interface StoreCategoryRepositoryCustom {
-    List<Long> findByCategoryCode(List<String> categories);
+    List<StoreDto.Store> findByCategoryCodeAndKeyword(List<String> categories, String keyword);
 
 }
