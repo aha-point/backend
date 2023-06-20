@@ -33,6 +33,7 @@ public class StoreRestController {
      */
     @PostMapping("/store:getStoreListByCategoryAndKeyword")
     @Operation(summary = "카테고리로 가게 리스트 조회", description = "일반회원들이 카테고리와 검색어로 가게리스트를 조회하는 api입니다.")
+    @Transactional
     public List<StoreDto.Store> getStoreListByCategoryAndkeyWord(CategoryFilter filter) {
         return storeFacade.getStoreListByCategories(filter);
     }
