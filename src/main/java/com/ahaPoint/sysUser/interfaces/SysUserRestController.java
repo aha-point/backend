@@ -80,6 +80,16 @@ public class SysUserRestController {
     }
 
     /**
+     * 로그인
+     */
+    @PostMapping("/sysUser:logIn2")
+    @Operation(summary = "로그인", description = "로그인하는 API입니다.")
+    public LogInResponse logIn(LogInInput input) {
+        return sysUserFacade.signIn(input);
+
+    }
+
+    /**
      * 중복 체크(전화번호)
      */
     @PostMapping("/sysUser:checkDuplicated")

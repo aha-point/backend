@@ -9,6 +9,7 @@ import com.ahaPoint.sysUser.interfaces.enums.UserType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -20,6 +21,8 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class SysUserServiceImpl implements SysUserService{
+
+    private final PasswordEncoder passwordEncoder;
 
     private final long VALID_MILISECOND = 1000L * 60 * 60; // 1 시간
 
@@ -36,7 +39,8 @@ public class SysUserServiceImpl implements SysUserService{
 
     @Override
     public SysUser saveSysUser(SysUserCommand.Save save) {
-        SysUser saveSysUser = SysUserCommand.Save.toEntity(save);
+        String encodePassword = passwordEncoder.encode(save.getPassword());
+        SysUser saveSysUser = SysUserCommand.Save.toEntity(save, encodePassword);
         return sysUserRepository.save(saveSysUser);
     }
 
@@ -52,10 +56,15 @@ public class SysUserServiceImpl implements SysUserService{
 
     @Override
     public LogInResponse signIn(String phoneNumber, String password) {
-        // id와 password 로 user정보 가지고 오기
-        Optional<SysUser> user = sysUserRepository.findByPhoneNumberAndPassword(phoneNumber, password);
+        // id로 user정보 가지고 오기
+        Optional<SysUser> user = sysUserRepository.findByPhoneNumber(phoneNumber);
         if (user.isEmpty()) {
             throw new RuntimeException("해당 유저가 존재하지 않습니다.");
+        }
+
+        String encodePassword = passwordEncoder.encode(password);
+        if (!passwordEncoder.matches(password, encodePassword)) {
+            throw new RuntimeException("비밀번호가 틀렸습니다.");
         }
 
         String token = JwtUtil.createToken(phoneNumber, secretKey, VALID_MILISECOND);

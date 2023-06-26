@@ -22,10 +22,10 @@ public class SysUserCommand {
         private String password; // 비밀번호
         private UserType type; // member or store
 
-        public static SysUser toEntity(SysUserCommand.Save save) {
+        public static SysUser toEntity(SysUserCommand.Save save, String encodePassword) {
             return SysUser.entityBuilder()
                     .phoneNumber(save.getPhoneNumber())
-                    .password(save.getPassword())
+                    .password(encodePassword)
                     .type(save.getType().name())
                     .createdAt(LocalDateTime.now())
                     .updatedAt(LocalDateTime.now())
