@@ -28,7 +28,7 @@ public class SysUserFacade {
         return sysUserService.isDuplicated(phoneNumber);
     }
 
-    public LogInResponse signIn(LogInInput input) {
+    public String signIn(LogInInput input) {
         return sysUserService.signIn(input.getPhoneNumber(), input.getPassword());
     }
 }

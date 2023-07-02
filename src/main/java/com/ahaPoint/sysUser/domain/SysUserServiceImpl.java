@@ -55,7 +55,7 @@ public class SysUserServiceImpl implements SysUserService{
     }
 
     @Override
-    public LogInResponse signIn(String phoneNumber, String password) {
+    public String signIn(String phoneNumber, String password) {
         // id로 user정보 가지고 오기
         Optional<SysUser> user = sysUserRepository.findByPhoneNumber(phoneNumber);
         if (user.isEmpty()) {
@@ -67,12 +67,7 @@ public class SysUserServiceImpl implements SysUserService{
             throw new RuntimeException("비밀번호가 틀렸습니다.");
         }
 
-        String token = JwtUtil.createToken(phoneNumber, secretKey, VALID_MILISECOND);
+        return JwtUtil.createToken(phoneNumber, secretKey, VALID_MILISECOND);
 
-        return LogInResponse.builder()
-                .result(Boolean.TRUE)
-                .userType(UserType.of(user.get().getType()))
-                .token(token)
-                .build();
     }
 }

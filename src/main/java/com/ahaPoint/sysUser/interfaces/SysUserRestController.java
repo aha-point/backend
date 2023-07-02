@@ -13,11 +13,16 @@ import com.ahaPoint.sysUser.domain.SysUser;
 import com.ahaPoint.sysUser.domain.SysUserCommand;
 import com.ahaPoint.sysUser.interfaces.enums.UserType;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.nio.file.attribute.UserPrincipal;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,6 +47,7 @@ public class SysUserRestController {
         // sysUser 저장
         SysUserCommand.Save save = SignUserInput.toSysUserCommand(input);
         SysUser sysUser = sysUserFacade.saveSysUser(save);
+
 
         // store 하고 저장
         if (UserType.STORE == UserType.of(sysUser.getType())) {
@@ -74,9 +80,8 @@ public class SysUserRestController {
      */
     @PostMapping("/sysUser:logIn")
     @Operation(summary = "로그인", description = "로그인하는 API입니다.")
-    public LogInResponse logInSysUser(LogInInput input) {
-        return sysUserFacade.signIn(input);
-
+    public ResponseEntity<String> logInSysUser(LogInInput input, HttpServletRequest request, HttpServletResponse response) {
+        return ResponseEntity.ok().body(sysUserFacade.signIn(input));
     }
 
     /**
@@ -84,9 +89,8 @@ public class SysUserRestController {
      */
     @PostMapping("/sysUser:logIn2")
     @Operation(summary = "로그인", description = "로그인하는 API입니다.")
-    public LogInResponse logIn(LogInInput input) {
-        return sysUserFacade.signIn(input);
-
+    public ResponseEntity<String> logIn(LogInInput input) {
+        return ResponseEntity.ok().body(sysUserFacade.signIn(input));
     }
 
     /**

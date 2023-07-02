@@ -10,5 +10,5 @@ public interface SysUserService {
 
     Boolean isDuplicated(String phoneNumber);
 
-    LogInResponse signIn(String phoneNumber, String password);
+    String signIn(String phoneNumber, String password);
 }

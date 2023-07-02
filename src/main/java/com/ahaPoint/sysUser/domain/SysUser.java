@@ -12,6 +12,8 @@ import org.hibernate.annotations.DynamicUpdate;
 import jakarta.validation.constraints.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
+
+import java.nio.file.attribute.UserPrincipal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,7 +24,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(builderMethodName = "entityBuilder", toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class SysUser {
+public class SysUser implements UserPrincipal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,4 +49,9 @@ public class SysUser {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false, mappedBy = "sysUser")
     private Member member;
+
+    @Override
+    public String getName() {
+        return null;
+    }
 }
