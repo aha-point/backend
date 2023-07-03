@@ -32,11 +32,6 @@ public class SecurityConfiguration {
     @Value("${jwt.secret}")
     private String secretKey;
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
 //    @Bean
 //    public WebSecurityCustomizer webSecurityCustomizer() {
 //        return web -> web.ignoring().requestMatchers("http://api.ahapoint.click:8080/**", "http://localhost:8080/**");
