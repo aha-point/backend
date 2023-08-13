@@ -31,12 +31,16 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public MemberInfo.Member getMemberInfo(String phoneNumber) {
         Optional<SysUser> sysUser = sysUserRepository.findByPhoneNumber(phoneNumber);
+        
         if (sysUser.isEmpty()) {
             throw new RuntimeException("해당 유저가 존재하지 않습니다.");
         }
 
-        Optional<Member> memberByMemberId = memberRepository.findMemberById(sysUser.get().getId());
+        Optional<Member> memberBySysId = memberRepository.findMemberBySysId(sysUser.get().getId());
 
-        return MemberInfo.Member.of(memberByMemberId.get());
+        if (memberBySysId.isEmpty()) {
+            throw new RuntimeException("해당 유저는 가게 유저 입니다.");
+        }
+        return MemberInfo.Member.of(memberBySysId.get());
     }
 }
