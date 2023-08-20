@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://database-1.cx7pm8zlmjuv.ap-northeast-2.rds.amazonaws.com:3306/aha_point?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-    username: admin
-    password: uiop9900
+    url: ${DATA_URL}
+    username: ${DATA_USERNAME}
+    password: ${DATA_PASSWORD}
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -24,8 +24,8 @@ jwt:
 
 message:
   api:
-    key: NCSMDO6G14FAUDYE
-    secret: TRRXJG5BFAJITU1LLHPVQWPHAD3LSQNH
+    key: ${API_KEY}
+    secret: ${API_SECRET}
   domain:
     address: https://api.coolsms.co.kr
 
