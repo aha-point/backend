@@ -22,4 +22,12 @@ spring:
 jwt:
   secret: ahaahaahaackjbskjvbdjkbvwvkndfkvjbsdljnbcvwoieh
 
+message:
+  api:
+    key: NCSMDO6G14FAUDYE
+    secret: TRRXJG5BFAJITU1LLHPVQWPHAD3LSQNH
+  domain:
+    address: https://api.coolsms.co.kr
+
+
 

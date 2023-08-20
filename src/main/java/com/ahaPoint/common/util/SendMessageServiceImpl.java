@@ -11,6 +11,7 @@ import net.nurigo.sdk.message.exception.NurigoUnknownException;
 import net.nurigo.sdk.message.model.Message;
 import net.nurigo.sdk.message.model.MessageType;
 import net.nurigo.sdk.message.service.DefaultMessageService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -22,12 +23,19 @@ public class SendMessageServiceImpl implements SendMessageService {
     private DefaultMessageService messageService;
     public static Integer CODE_NUMBER = 2;
     public static Integer ROUND_NUMBER = 999;
-    public static String api_key = "NCSMDO6G14FAUDYE ";
-    public static String api_secret = "TRRXJG5BFAJITU1LLHPVQWPHAD3LSQNH";
+
+    @Value("${message.api.key}")
+    public String API_KEY;
+
+    @Value("${message.api.secret}")
+    public String API_SECRET;
+
+    @Value("${message.domain.address}")
+    public String DOMAIN_ADDRESS;
 
     @Override
     public String sendMessage(CheckNumber input) {
-        this.messageService = NurigoApp.INSTANCE.initialize(api_key, api_secret, "https://api.coolsms.co.kr");
+        this.messageService = NurigoApp.INSTANCE.initialize(API_KEY, API_SECRET, DOMAIN_ADDRESS);
         String randomCode = generate6RandomCode();
 
         //HashMap<String, String> params = new HashMap<String, String>();
